@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // 创建文档
-  generateDocument()
+  generateDocument(app)
   await app.listen(3000);
 }
 bootstrap();
