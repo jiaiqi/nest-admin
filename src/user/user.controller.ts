@@ -3,22 +3,29 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('user')
 @ApiTags('用户管理')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService,
+    // 注入环境变量
+    private readonly configService: ConfigService
+  ) { }
 
   @Post()
   @ApiOperation({
-    summary:'新增用户'
+    summary: '新增用户'
   })
   @ApiResponse({
-    status:HttpStatus.CREATED,
-    type:CreateUserDto
+    status: HttpStatus.CREATED,
+    type: CreateUserDto
   })
   create(@Body() createUserDto: CreateUserDto) {
-    throw new HttpException('自定义异常冲突',HttpStatus.CONFLICT)
+    // throw new HttpException('自定义异常冲突', HttpStatus.CONFLICT)
+    console.log('环境变量', this.configService.get<string>('database.url')
+    );
+
     return this.userService.create(createUserDto);
   }
 
