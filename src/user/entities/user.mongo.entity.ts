@@ -1,10 +1,8 @@
 import { Entity, Column, Unique, UpdateDateColumn, ObjectIdColumn, CreateDateColumn, ManyToMany, JoinTable, OneToOne } from 'typeorm';
 import { ObjectId } from 'mongoose';
-import { Role } from './role.mongo.entity';
-import { Common } from '@/shared/entities/common.entity';
 
 @Entity()
-export class User extends Common {
+export class User {
 
     // 昵称
     @Column('text')
