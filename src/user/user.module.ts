@@ -8,7 +8,7 @@ import { MongoRepository } from 'typeorm';
 
 @Module({
   controllers: [UserController],
-  providers: [UserService, ...UserProviders, MongoRepository],
+  providers: [UserService, ...UserProviders],
   // providers: [UserService, ConfigService,...UserProviders],
   imports: [SharedModule],
 })
