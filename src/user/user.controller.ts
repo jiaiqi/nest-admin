@@ -10,7 +10,7 @@ import { ConfigService } from '@nestjs/config';
 export class UserController {
   constructor(private readonly userService: UserService,
     // 注入环境变量
-    private readonly configService: ConfigService
+    // private readonly configService: ConfigService
   ) { }
 
   @Post()
@@ -21,12 +21,13 @@ export class UserController {
     status: HttpStatus.CREATED,
     type: CreateUserDto
   })
-  create(@Body() createUserDto: CreateUserDto) {
+  create(@Body() user: CreateUserDto) {
     // throw new HttpException('自定义异常冲突', HttpStatus.CONFLICT)
-    console.log('环境变量', this.configService.get<string>('database.url')
-    );
+    // console.log('环境变量', this.configService.get<string>('database.url')
+    // );
+    console.log(user);
 
-    return this.userService.create(createUserDto);
+    return this.userService.create(user);
   }
 
   @Get()

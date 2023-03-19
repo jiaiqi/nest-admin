@@ -21,10 +21,7 @@ export class UserService {
 
     // return 'This action adds a new user';
     this.logger.info(null, 'user create ...', { a: 123 })
-    return this.userRespository.save({
-      name: 'lyc',
-      email: '1@111.com'
-    })
+    return this.userRespository.save({ ...createUserDto })
   }
 
   findAll() {
