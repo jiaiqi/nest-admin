@@ -16,13 +16,17 @@ export class UserService {
 
     // return 'This action adds a new user';
 
-    return this.userRespository.findAndCount({
-      
+    return this.userRespository.save({
+      name: 'lyc',
+      email: '1@111.com'
     })
   }
 
   findAll() {
-    return `This action returns all user`;
+    return this.userRespository.findAndCount({
+      
+    })
+    // return `This action returns all user`;
   }
 
   findOne(id: number) {
