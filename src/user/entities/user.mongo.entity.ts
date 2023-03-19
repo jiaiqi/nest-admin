@@ -1,14 +1,17 @@
-import { Entity, Column, Unique, UpdateDateColumn, ObjectIdColumn, CreateDateColumn, ManyToMany, JoinTable, OneToOne } from 'typeorm';
+import { Entity, Column, Unique, UpdateDateColumn, ObjectIdColumn, CreateDateColumn, ManyToMany, JoinTable, OneToOne, PrimaryColumn } from 'typeorm';
 import { ObjectId } from 'mongoose';
 
 @Entity()
 export class User {
 
+    @ObjectIdColumn()
+    _id:string
+    
     // 昵称
     @Column('text')
     name: string;
 
-
+    // 头像
     @Column('text')
     avatar: string;
 

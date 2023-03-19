@@ -1,16 +1,21 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { MongoRepository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from './entities/user.mongo.entity';
 
 @Injectable()
 export class UserService {
-  constructor() {
+  constructor(
+    @Inject('USER_REPOSITORY')
+    private readonly userRepository: MongoRepository<User>
+  ) {
   }
 
   create(createUserDto: CreateUserDto) {
     // console.log('Env:', this.systemService.getEnv());
-
-    return 'This action adds a new user';
+    return this.userRepository.save(createUserDto)
+    // return 'This action adds a new user';
   }
 
   findAll() {
