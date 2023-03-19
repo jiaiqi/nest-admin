@@ -1,11 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { SystemService } from 'src/shared/system.service';
+import { MongoRepository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from './entities/user.mongo.entity';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly systemService: SystemService) { }
+  constructor(private readonly systemService: SystemService,
+    private readonly userRespository: MongoRepository<User>) { }
 
   create(createUserDto: CreateUserDto) {
     console.log('Env:', this.systemService.getEnv());
