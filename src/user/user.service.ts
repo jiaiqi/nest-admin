@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { AppLogger } from 'src/shared/logger/logger.service';
 import { SystemService } from 'src/shared/system.service';
 import { MongoRepository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -9,13 +10,17 @@ import { User } from './entities/user.mongo.entity';
 export class UserService {
   constructor(private readonly systemService: SystemService,
     @Inject("USER_REPOSITORY")
-    private readonly userRespository: MongoRepository<User>) { }
+    private readonly userRespository: MongoRepository<User>,
+    private readonly logger: AppLogger
+  ) {
+    this.logger.setContext(UserService.name)
+  }
 
   create(createUserDto: CreateUserDto) {
     // console.log('Env:', this.systemService.getEnv());
 
     // return 'This action adds a new user';
-
+    this.logger.info(null, 'user create ...', { a: 123 })
     return this.userRespository.save({
       name: 'lyc',
       email: '1@111.com'
@@ -24,7 +29,7 @@ export class UserService {
 
   findAll() {
     return this.userRespository.findAndCount({
-      
+
     })
     // return `This action returns all user`;
   }

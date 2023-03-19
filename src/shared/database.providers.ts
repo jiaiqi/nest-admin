@@ -11,7 +11,8 @@ export const DatabaseProviders = [
             const config = {
                 type: databaseType,
                 url: ConfigService.get<string>('database.url'),
-                username: ConfigService.get<string>('database.username'),
+                username: ConfigService.get<string>('database.user'),
+                pasword: ConfigService.get<string>('database.pass'),
                 database: ConfigService.get<string>('database.name'),
                 entities: [
                     path.join(__dirname, `../../**/*.mongo.entity{.ts,.js}`)
@@ -20,6 +21,9 @@ export const DatabaseProviders = [
                 synchronize: ConfigService.get<boolean>('database.synchronize'),
 
             }
+            console.log("===== config start ======\n", config);
+            console.log("===== config end ======\n");
+
             const ds = new DataSource(config)
             await ds.initialize()
             return ds

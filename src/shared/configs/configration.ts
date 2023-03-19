@@ -7,6 +7,6 @@ export default (): any => ({
         user: process.env.DB_USER,
         pass: process.env.DB_PASS,
         synchronize: process.env.DB_SYNCHRONIZE,
-        logging: process.env.LOGGING
+        logging: process.env.DB_LOGGING
     }
 })

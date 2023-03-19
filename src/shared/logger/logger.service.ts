@@ -10,7 +10,7 @@ export class AppLogger {
 
     constructor() {
         this.logger = createLogger({
-            level: "info",// 分级
+            level: process.env.LOGGER_LEVEL,// 分级
             format: format.combine(
                 format.timestamp(),
                 format.prettyPrint()
