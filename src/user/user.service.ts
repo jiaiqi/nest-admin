@@ -19,18 +19,24 @@ export class UserService {
   }
 
   findAll() {
+    return this.userRepository.find()
     return `This action returns all user`;
   }
 
   findOne(id: number) {
+    return this.userRepository.findBy(id)
     return `This action returns a #${id} user`;
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
+    return this.userRepository.update(id, updateUserDto)
+
     return `This action updates a #${id} user`;
   }
 
   remove(id: number) {
+    return this.userRepository.delete(id)
+
     return `This action removes a #${id} user`;
   }
 }

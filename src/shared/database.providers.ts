@@ -1,5 +1,5 @@
 // import { User } from "@/user/entities/user.mongo.entity";
-import { User } from "@/user/entities/user.mongo.entity";
+// import { User } from "@/user/entities/user.mongo.entity";
 import { ConfigService } from "@nestjs/config";
 import { DataSource, DataSourceOptions } from "typeorm";
 
@@ -22,8 +22,7 @@ export const DatabaseProvider = [
                 logging: configService.get<boolean>('database.logging'),
                 synchronize: configService.get<boolean>('database.synchronize'),
                 entities: [
-                    path.join(__dirname, '../**/entities/*.mongo.entity{.ts,.js'),
-                    User
+                    path.join(__dirname, '../../**/entities/*.mongo.entity{.ts,.js}'),
                 ]
             }
 
