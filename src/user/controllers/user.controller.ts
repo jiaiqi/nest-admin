@@ -37,7 +37,7 @@ export class UserController {
   })
   @Get()
   async findAll(@Query() query) {
-    const { data, count } = await this.userService.findAll(query)
+    const { data, count } = await this.userService.findAll()
     return {
       data,
       meta: {
@@ -74,8 +74,8 @@ export class UserController {
     type: CreateUserDto
   })
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
+  update(@Param('id') id: string, @Body() user: CreateUserDto) {
+    return this.userService.update(id, user);
   }
 
   @ApiOperation({
