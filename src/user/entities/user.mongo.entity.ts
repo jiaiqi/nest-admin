@@ -12,7 +12,7 @@ export class User {
     @Column('text')
     avatar: string;
 
-    @Unique('email', ['email'])
+    // @Unique('email', ['email'])
     @Column({ length: 200 })
     email: string;
 
