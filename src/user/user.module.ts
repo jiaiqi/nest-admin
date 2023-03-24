@@ -13,4 +13,4 @@ import { AppLogger } from 'src/shared/logger/logger.service';
   imports: [SharedModule],
   exports:[UserService,...UserProviders]
 })
-export class UserModule { }
+export class UserModule {}

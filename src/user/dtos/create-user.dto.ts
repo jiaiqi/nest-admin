@@ -8,7 +8,7 @@ export class CreateUserDto {
     phone: string;
 
     @ApiProperty({
-        example:'lyciloveu'
+        example:'goudaner'
     })
     password: string;
 
