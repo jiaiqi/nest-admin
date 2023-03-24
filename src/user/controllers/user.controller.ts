@@ -4,6 +4,7 @@ import { CreateUserDto } from '../dtos/create-user.dto';
 import { UpdateUserDto } from '../dtos/update-user.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { PaginationParamsDto } from '@/shared/dtos/pagination-params.dto';
+import { QueryBodyDto } from '@/shared/dtos/query-body-dto';
 
 @Controller('user')
 @ApiTags('用户管理')
@@ -62,14 +63,15 @@ export class UserController {
     status: HttpStatus.NOT_FOUND,
   })
   @Post('/list')
-  async findAll2(@Body() body: PaginationParamsDto) {
-    const { data, count } = await this.userService.findAll(body)
+  async findAll2(@Body() body: QueryBodyDto) {
+    const {page} = body
+    const { data, count } = await this.userService.findAll2(body)
     return {
       data,
-      meta: {
+      page: {
         total: count,
-        pageSize: Number(body.pageSize),
-        page: Number(body.page)
+        size: Number(page.size),
+        page: Number(page.current)
       }
     };
   }
@@ -89,6 +91,7 @@ export class UserController {
   async findOne(@Param('id') id: string) {
     return await this.userService.findOne(id);
   }
+
 
   @ApiOperation({
     summary: '更新单个用户'
