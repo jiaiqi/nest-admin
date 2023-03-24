@@ -1,7 +1,9 @@
+import { PaginationParamsDto } from '@/shared/dtos/pagination-params.dto';
 import { Inject, Injectable } from '@nestjs/common';
 import { AppLogger } from 'src/shared/logger/logger.service';
 import { SystemService } from 'src/shared/system.service';
 import { MongoRepository } from 'typeorm';
+import { createLogger } from 'winston';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { UpdateUserDto } from '../dtos/update-user.dto';
 import { User } from '../entities/user.mongo.entity';
@@ -20,9 +22,12 @@ export class UserService {
     return this.userRespository.save({ ...user })
   }
 
-  async findAll(): Promise<{ data: User[], count: number }> {
+  async findAll({ page, pageSize }: PaginationParamsDto): Promise<{ data: User[], count: number }> {
     const [data, count] = await this.userRespository.findAndCount({
-
+      order: { createdAt: 'DESC' },
+      skip: (page - 1) * pageSize,
+      take: pageSize * 1,
+      cache: true,
     })
     return { data, count }
     // return `This action returns all user`;
