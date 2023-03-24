@@ -1,16 +1,14 @@
 import { Module } from '@nestjs/common';
 import { UserService } from './services/user.service';
 import { UserController } from './controllers/user.controller';
-import { SharedModule } from 'src/shared/shared.module';
-import { ConfigService } from '@nestjs/config';
 import { UserProviders } from './user.providers';
+import { ShareModule } from '@/shared/shares.module';
 import { AppLogger } from 'src/shared/logger/logger.service';
 
 @Module({
+  imports: [ShareModule],
   controllers: [UserController],
-  providers: [UserService, ...UserProviders, AppLogger,ConfigService],
-  // providers: [UserService, ConfigService,...UserProviders],
-  imports: [SharedModule],
-  exports:[UserService,...UserProviders]
+  providers: [UserService, ...UserProviders],
+  exports: [UserService]
 })
 export class UserModule {}

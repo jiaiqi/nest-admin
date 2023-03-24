@@ -1,30 +1,37 @@
-import { DataSource, DataSourceOptions } from 'typeorm';
-const path = require('path');
-import { ConfigService } from '@nestjs/config';
+// import { User } from "@/user/entities/user.mongo.entity";
+// import { User } from "@/user/entities/user.mongo.entity";
+import { ConfigService } from "@nestjs/config";
+import { DataSource, DataSourceOptions } from "typeorm";
 
-// 设置数据库类型
-const databaseType: DataSourceOptions['type'] = 'mongodb';
-// 数据库注入
-export const DatabaseProviders = [
+const path = require('path')
+
+const databaseType: DataSourceOptions['type'] = 'mongodb'
+export const DatabaseProvider = [
     {
         provide: 'MONGODB_DATA_SOURCE',
+        //数据源 url、用户名、密码
         inject: [ConfigService],
         useFactory: async (configService: ConfigService) => {
+
             const config = {
                 type: databaseType,
                 url: configService.get<string>('database.url'),
                 username: configService.get<string>('database.user'),
                 password: configService.get<string>('database.pass'),
                 database: configService.get<string>('database.name'),
-                entities: [path.join(__dirname, `../../**/*.mongo.entity{.ts,.js}`)],
                 logging: configService.get<boolean>('database.logging'),
                 synchronize: configService.get<boolean>('database.synchronize'),
+                entities: [
+                    path.join(__dirname, '../../**/entities/*.mongo.entity{.ts,.js}'),
+                ]
             }
-            console.log('config:\n',config);
-            
-            const ds = new DataSource(config)
-            await ds.initialize()
-            return ds
+
+            const dataSource = new DataSource(config)
+            console.log('config:\n', config);
+
+            await dataSource.initialize()
+
+            return dataSource
         }
     }
-];
+]

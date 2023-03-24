@@ -1,20 +1,18 @@
-import { Entity, Column, Unique, UpdateDateColumn, ObjectIdColumn, CreateDateColumn, ManyToMany, JoinTable, OneToOne } from 'typeorm';
+import { Entity, Column, Unique, UpdateDateColumn, ObjectIdColumn, CreateDateColumn, ManyToMany, JoinTable, OneToOne, PrimaryColumn, VersionColumn } from 'typeorm';
 import { ObjectId } from 'mongoose';
-import { Role } from './role.mongo.entity';
-import { Common } from '@/shared/entities/common.entity';
 
 @Entity()
-export class User extends Common {
+export class User {
 
     // 昵称
     @Column('text')
     name: string;
 
-
+    // 头像
     @Column('text')
     avatar: string;
 
-    // @Unique('email', ['email'])
+    @Unique('email', ['email'])
     @Column({ length: 200 })
     email: string;
 
@@ -64,4 +62,29 @@ export class User extends Common {
 
     @Column()
     isAccountDisabled?: boolean;
+
+    // 主键
+    @ObjectIdColumn()
+    _id: string
+
+    // 创建时间
+    @CreateDateColumn()
+    createdAt: Date
+
+    // 更新时间
+    @UpdateDateColumn()
+    updatedAt: Date
+
+    // 软删除
+    @Column({
+        default: false,
+        select: false,
+    })
+    isDelete: boolean
+
+    // 更新次数
+    @VersionColumn({
+        select: false
+    })
+    version: number
 }

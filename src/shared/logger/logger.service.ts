@@ -1,8 +1,8 @@
-import { createLogger, format, Logger, transports } from "winston";
+import { createLogger, Logger, format, transports } from "winston"
 
 export class AppLogger {
-    private context?: string;
-    private logger: Logger;
+    private context?: string
+    private logger: Logger
 
     public setContext(context: string): void {
         this.context = context
@@ -10,71 +10,96 @@ export class AppLogger {
 
     constructor() {
         this.logger = createLogger({
-            level: process.env.LOGGER_LEVEL,// 分级
+            level: process.env.LOGGER_LEVEL,//分级
             format: format.combine(
                 format.timestamp(),
-                format.prettyPrint()
+                format.prettyPrint(),
             ),
             transports: [
-                new transports.File({
-                    filename: 'logs/error.log',
-                    level: "error"
-                }),
-                new transports.File({
-                    filename: 'logs/info.log',
-                    level: "info"
-                }),
-                new transports.Console()
-            ]
+                new transports.Console(),
+                new transports.File({ filename: 'logs/error.log', level: 'error' }),
+                new transports.File({ filename: 'logs/combined.log' }),
+            ],
         })
     }
 
-    // 具体日志方法实现
-    error(ctx: any,
+    error(
+        ctx: any,
         message: string,
-        meta?: Record<string, any>
+        meta?: Record<string, any>,
     ): Logger {
+
         return this.logger.error({
             message,
             contextName: this.context,
             ctx,
-            ...meta
-        })
+            ...meta,
+        });
     }
 
-    warn(ctx: any,
+    warn(
+        ctx: any,
         message: string,
-        meta?: Record<string, any>
+        meta?: Record<string, any>,
     ): Logger {
         return this.logger.warn({
             message,
             contextName: this.context,
             ctx,
-            ...meta
-        })
+            ...meta,
+        });
     }
 
-    debug(ctx: any,
+    info(
+        ctx: any,
         message: string,
-        meta?: Record<string, any>
-    ): Logger {
-        return this.logger.debug({
-            message,
-            contextName: this.context,
-            ctx,
-            ...meta
-        })
-    }
-
-    info(ctx: any,
-        message: string,
-        meta?: Record<string, any>
+        meta?: Record<string, any>,
     ): Logger {
         return this.logger.info({
             message,
             contextName: this.context,
             ctx,
-            ...meta
-        })
+            ...meta,
+        });
+    }
+
+    debug(
+        ctx: any,
+        message: string,
+        meta?: Record<string, any>,
+    ): Logger {
+
+        return this.logger.debug({
+            message,
+            contextName: this.context,
+            ctx,
+            ...meta,
+        });
+    }
+
+    verbose(
+        ctx: any,
+        message: string,
+        meta?: Record<string, any>,
+    ): Logger {
+        return this.logger.verbose({
+            message,
+            contextName: this.context,
+            ctx,
+            ...meta,
+        });
+    }
+
+    log(
+        ctx: any,
+        message: string,
+        meta?: Record<string, any>,
+    ): Logger {
+        return this.logger.info({
+            message,
+            contextName: this.context,
+            ctx,
+            ...meta,
+        });
     }
 }
