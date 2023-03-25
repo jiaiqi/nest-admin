@@ -1,24 +1,32 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiPropertyOptional } from "@nestjs/swagger";
 
 
 export class CreateUserDto {
-    @ApiProperty({
-        example:'15191803240'
+    @ApiPropertyOptional({
+        description: "手机号",
+        type: String,
+        example: '15191803240'
     })
     phone: string;
 
-    @ApiProperty({
-        example:'goudaner'
+    @ApiPropertyOptional({
+        description: "密码",
+        type: String,
+        example: '15191803240'
     })
     password: string;
 
-    @ApiProperty({
-        example:'2468260248@qq.com'
+    @ApiPropertyOptional({
+        description: "邮箱",
+        type: String,
+        example: '2468260248@qq.com'
     })
     email: string;
 
-    @ApiProperty({
-        example:'jiaqi'
+    @ApiPropertyOptional({
+        description: "用户名",
+        type: String,
+        example: 'jiaqi'
     })
     name: string;
 }

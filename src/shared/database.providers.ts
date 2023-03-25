@@ -27,7 +27,7 @@ export const DatabaseProvider = [
             }
 
             const dataSource = new DataSource(config)
-            console.log('config:\n', config);
+            // console.log('config:\n', config);
 
             await dataSource.initialize()
 

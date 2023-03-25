@@ -7,13 +7,13 @@ export const generateDocument = app => {
         .setTitle(packageConfig.name)
         .setDescription(packageConfig.description)
         .setVersion(packageConfig.version)
+        .setExternalDoc('knife4j文档地址','/doc.html')
         .addBearerAuth() //jwt 允许token鉴权
         .build()
 
     const document = SwaggerModule.createDocument(app, options)
 
     SwaggerModule.setup('/api/doc', app, document)
-    console.log(`swagger-ui文档地址：localhost:3000/api/doc`);
 
     knife4jSetup(app, [
         {
@@ -23,5 +23,5 @@ export const generateDocument = app => {
             location: `/api/doc-json`,
         },
     ])
-    console.log(`knife4jSetup文档地址：localhost:3000/doc.html`);
+
 }

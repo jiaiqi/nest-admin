@@ -10,5 +10,8 @@ async function bootstrap() {
   generateDocument(app)
 
   await app.listen(3000);
+
+  console.log(`swagger-ui：localhost:3000/api/doc`);
+  console.log(`knife4j：localhost:3000/doc.html`);
 }
 bootstrap();

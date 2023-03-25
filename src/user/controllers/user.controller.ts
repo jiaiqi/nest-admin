@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus, HttpException, Query } from '@nestjs/common';
 import { UserService } from '../services/user.service';
 import { CreateUserDto } from '../dtos/create-user.dto';
-import { UpdateUserDto } from '../dtos/update-user.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { PaginationParamsDto } from '@/shared/dtos/pagination-params.dto';
 import { QueryBodyDto } from '@/shared/dtos/query-body-dto';
