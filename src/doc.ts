@@ -17,9 +17,9 @@ export const generateDocument = app => {
 
     knife4jSetup(app, [
         {
-            name: '2.X版本',
+            name: packageConfig.version,
             url: `/api/doc-json`,
-            swaggerVersion: '2.0',
+            swaggerVersion: '3.0',
             location: `/api/doc-json`,
         },
     ])

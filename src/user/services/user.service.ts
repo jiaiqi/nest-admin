@@ -4,6 +4,7 @@ import { AppLogger } from 'src/shared/logger/logger.service';
 import { SystemService } from 'src/shared/system.service';
 import { MongoRepository } from 'typeorm';
 import { CreateUserDto } from '../dtos/create-user.dto';
+import { UpdateUserDto } from '../dtos/update-user.dto';
 import { User } from '../entities/user.mongo.entity';
 
 @Injectable()
@@ -62,7 +63,7 @@ export class UserService {
     return await this.userRespository.findOneBy(id);
   }
 
-  async update(id: string, user: CreateUserDto) {
+  async update(id: string, user: UpdateUserDto) {
     return await this.userRespository.update(id, user)
   }
 

@@ -1,4 +1,5 @@
 import { ApiPropertyOptional } from "@nestjs/swagger";
+import { Length } from "class-validator";
 
 
 export class CreateUserDto {
@@ -14,6 +15,7 @@ export class CreateUserDto {
         type: String,
         example: '15191803240'
     })
+    @Length(6, 16) //长度 6-16位
     password: string;
 
     @ApiPropertyOptional({

@@ -112,11 +112,7 @@ export class UserController {
     summary: '删除单个用户'
   })
   @ApiResponse({
-    status: HttpStatus.OK,
-    type: CreateUserDto
-  })
-  @ApiResponse({
-    status: HttpStatus.NOT_FOUND,
+    status: HttpStatus.NO_CONTENT,
     type: CreateUserDto
   })
   @Delete(':id')
