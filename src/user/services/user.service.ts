@@ -2,11 +2,9 @@ import { PaginationParamsDto } from '@/shared/dtos/pagination-params.dto';
 import { Inject, Injectable } from '@nestjs/common';
 import { AppLogger } from 'src/shared/logger/logger.service';
 import { SystemService } from 'src/shared/system.service';
-import { Equal, MongoRepository, Not } from 'typeorm';
+import { MongoRepository } from 'typeorm';
 import { CreateUserDto } from '../dtos/create-user.dto';
-import { UpdateUserDto } from '../dtos/update-user.dto';
 import { User } from '../entities/user.mongo.entity';
-
 
 @Injectable()
 export class UserService {
@@ -48,25 +46,6 @@ export class UserService {
       orderParams = { createdAt: "DESC" }
     }
 
-    // const whereParams = {
-    // }
-    // if (Array.isArray(where) && where.length > 0) {
-    //   where.forEach(item => {
-    //     switch (item.rule) {
-    //       case 'eq':
-    //         whereParams[item.column] = item.value
-    //         break;
-    //       case 'ne':
-    //         whereParams[item.column] = new RegExp(`^?!${item.value}$`)
-    //         break;
-    //       default:
-    //         whereParams[item.column] = item.value
-    //         break;
-    //     }
-    //   })
-    // }
-    // console.log(whereParams,'where');
-    
     const [data, count] = await this.userRespository.findAndCount({
       // select:[],
       where,

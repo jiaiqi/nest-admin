@@ -1,8 +1,8 @@
 {
   "name": "admin-server",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "基于nestjs搭建的后台管理系统",
+  "author": "jiaqi",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -32,12 +32,16 @@
     "mongodb": "^3.6.0",
     "mongoose": "^7.0.2",
     "mysql2": "^3.2.0",
+    "nest-knife4j": "^1.0.1",
+    "nestjs-knife4j": "^1.0.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
+    "swagger-ui-express": "^4.6.2",
     "typeorm": "0.3.11",
     "winston": "^3.8.2"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.19",
     "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
