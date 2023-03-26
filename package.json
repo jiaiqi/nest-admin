@@ -33,7 +33,6 @@
     "mongoose": "^7.0.2",
     "mysql2": "^3.2.0",
     "nest-knife4j": "^1.0.1",
-    "nestjs-knife4j": "^1.0.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
     "swagger-ui-express": "^4.6.2",
