@@ -1,7 +1,7 @@
 import { Entity, Column } from 'typeorm';
-import { ObjectId } from 'mongoose';
 import { Common } from '@/shared/entities/common.entity';
 
+// Entity-将模型标记为实体。 实体是一个转换为数据库表的类
 @Entity()
 export class User extends Common {
   // 昵称
@@ -16,39 +16,12 @@ export class User extends Common {
   @Column({ length: 200 })
   email: string;
 
-  // 手机号
-  @Column('text')
-  phoneNumber: string;
-
   @Column()
   password: string;
 
-  @Column()
-  role?: ObjectId;
-
-  @Column()
-  job: string;
-
-  @Column()
-  jobName: string;
-
-  @Column()
-  organization: string;
-
-  @Column()
-  organizationName: string;
-
-  @Column()
-  location: string;
-
-  @Column()
-  locationName: string;
-
-  @Column()
-  introduction: string;
-
-  @Column()
-  personalWebsite: string;
+  // 手机号
+  @Column('text')
+  phone: string;
 
   @Column('boolean')
   verified: boolean;

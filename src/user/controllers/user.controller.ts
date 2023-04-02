@@ -114,7 +114,11 @@ export class UserController {
   })
   @Patch(':id')
   async update(@Param('id') id: string, @Body() user: CreateUserDto) {
-    return await this.userService.update(id, user);
+    const data = await this.userService.update(id, user);
+    return {
+      data,
+      status: 'success',
+    };
   }
 
   @ApiOperation({
