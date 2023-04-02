@@ -113,8 +113,8 @@ export class UserController {
     type: CreateUserDto,
   })
   @Patch(':id')
-  update(@Param('id') id: string, @Body() user: CreateUserDto) {
-    return this.userService.update(id, user);
+  async update(@Param('id') id: string, @Body() user: CreateUserDto) {
+    return await this.userService.update(id, user);
   }
 
   @ApiOperation({
@@ -125,7 +125,7 @@ export class UserController {
     type: CreateUserDto,
   })
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(id);
+  async remove(@Param('id') id: string) {
+    return await this.userService.remove(id);
   }
 }
