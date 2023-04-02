@@ -8,6 +8,6 @@ import { ShareModule } from '@/shared/shares.module';
   imports: [ShareModule],
   controllers: [UserController],
   providers: [UserService, ...UserProviders],
-  exports: [UserService]
+  exports: [UserService],
 })
 export class UserModule {}

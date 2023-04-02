@@ -1,14 +1,12 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class SystemService {
-    constructor(){
+  constructor() {}
 
-    }
-
-    getEnv(){
-        return {
-            a:1
-        }
-    }
+  getEnv() {
+    return {
+      a: 1,
+    };
+  }
 }

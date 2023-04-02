@@ -9,42 +9,47 @@ import { User } from '../entities/user.mongo.entity';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly systemService: SystemService,
-    @Inject("USER_REPOSITORY")
+  constructor(
+    private readonly systemService: SystemService,
+    @Inject('USER_REPOSITORY')
     private readonly userRespository: MongoRepository<User>,
-    private readonly logger: AppLogger
+    private readonly logger: AppLogger,
   ) {
-    this.logger.setContext(UserService.name)
+    this.logger.setContext(UserService.name);
   }
 
   create(user: CreateUserDto) {
-    return this.userRespository.save({ ...user })
+    return this.userRespository.save({ ...user });
   }
 
-  async findAll({ page, pageSize }): Promise<{ data: User[], count: number }> {
+  async findAll({ page, pageSize }): Promise<{ data: User[]; count: number }> {
     console.log(page);
 
     const [data, count] = await this.userRespository.findAndCount({
-      order: { createdAt: "DESC" },
+      order: { createAt: 'DESC' },
       skip: (page - 1) * pageSize,
       take: pageSize * 1,
       cache: true,
-    })
-    return { data, count }
+    });
+    return { data, count };
     // return `This action returns all user`;
   }
 
-  async findAll2({ page, order, where }): Promise<{ data: User[], count: number }> {
-    // createdAt: "DESC" 
-    let orderParams = {}
+  async findAll2({
+    page,
+    order,
+    where,
+  }): Promise<{ data: User[]; count: number }> {
+    // createdAt: "DESC"
+    let orderParams = {};
     if (Array.isArray(order) && order.length > 0) {
-      order.forEach(item => {
-        orderParams[item.column] = item.type
-      })
+      order.forEach((item) => {
+        orderParams[item.column] = item.type;
+      });
     } else if (order) {
-      orderParams = { ...order }
+      orderParams = { ...order };
     } else {
-      orderParams = { createdAt: "DESC" }
+      orderParams = { createdAt: 'DESC' };
     }
 
     const [data, count] = await this.userRespository.findAndCount({
@@ -54,8 +59,8 @@ export class UserService {
       skip: (page.current - 1) * page.size,
       take: page.size * 1,
       cache: true,
-    })
-    return { data, count }
+    });
+    return { data, count };
     // return `This action returns all user`;
   }
 
@@ -64,10 +69,10 @@ export class UserService {
   }
 
   async update(id: string, user: UpdateUserDto) {
-    return await this.userRespository.update(id, user)
+    return await this.userRespository.update(id, user);
   }
 
   async remove(id: string): Promise<any> {
-    return await this.userRespository.delete(id)
+    return await this.userRespository.delete(id);
   }
 }

@@ -1,90 +1,65 @@
-import { Entity, Column, Unique, UpdateDateColumn, ObjectIdColumn, CreateDateColumn, ManyToMany, JoinTable, OneToOne, PrimaryColumn, VersionColumn } from 'typeorm';
+import { Entity, Column } from 'typeorm';
 import { ObjectId } from 'mongoose';
+import { Common } from '@/shared/entities/common.entity';
 
 @Entity()
-export class User {
+export class User extends Common {
+  // 昵称
+  @Column('text')
+  name: string;
 
-    // 昵称
-    @Column('text')
-    name: string;
+  // 头像
+  @Column('text')
+  avatar: string;
 
-    // 头像
-    @Column('text')
-    avatar: string;
+  // @Unique('email', ['email'])
+  @Column({ length: 200 })
+  email: string;
 
-    // @Unique('email', ['email'])
-    @Column({ length: 200 })
-    email: string;
+  // 手机号
+  @Column('text')
+  phoneNumber: string;
 
-    // 手机号
-    @Column('text')
-    phoneNumber: string;
+  @Column()
+  password: string;
 
-    @Column()
-    password: string;
+  @Column()
+  role?: ObjectId;
 
-    @Column()
-    role?: ObjectId
+  @Column()
+  job: string;
 
-    @Column()
-    job: string;
+  @Column()
+  jobName: string;
 
-    @Column()
-    jobName: string;
+  @Column()
+  organization: string;
 
-    @Column()
-    organization: string;
+  @Column()
+  organizationName: string;
 
-    @Column()
-    organizationName: string;
+  @Column()
+  location: string;
 
-    @Column()
-    location: string;
+  @Column()
+  locationName: string;
 
-    @Column()
-    locationName: string;
+  @Column()
+  introduction: string;
 
-    @Column()
-    introduction: string;
+  @Column()
+  personalWebsite: string;
 
-    @Column()
-    personalWebsite: string;
+  @Column('boolean')
+  verified: boolean;
 
-    @Column("boolean")
-    verified: boolean;
+  // 加密盐
+  @Column({
+    type: 'text',
+    select: false,
+  })
+  salt: string;
 
-    // 加密盐
-    @Column({
-        type: 'text',
-        select: false,
-    })
-    salt: string;
-
-    @Column()
-    isAccountDisabled?: boolean;
-
-    // 主键
-    @ObjectIdColumn()
-    _id: string
-
-    // 创建时间
-    @CreateDateColumn()
-    createdAt: Date
-
-    // 更新时间
-    @UpdateDateColumn()
-    updatedAt: Date
-
-    // 软删除
-    @Column({
-        default: false,
-        select: false,
-    })
-    isDelete: boolean
-
-    // 更新次数
-    @VersionColumn({
-        select: false
-    })
-    version: number
+  @Column()
+  isAccountDisabled?: boolean;
 }

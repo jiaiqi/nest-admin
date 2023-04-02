@@ -10,29 +10,29 @@ export class UserService {
   constructor(
     @Inject('USER_REPOSITORY')
     private readonly userRepository: MongoRepository<User>,
-    private readonly logger: AppLogger
+    private readonly logger: AppLogger,
   ) {
-    this.logger.setContext(UserService.name)
+    this.logger.setContext(UserService.name);
   }
 
   create(createUserDto: CreateUserDto) {
-    this.logger.info(null,'user created ...')
-    return this.userRepository.save(createUserDto)
+    this.logger.info(null, 'user created ...');
+    return this.userRepository.save(createUserDto);
   }
 
   findAll() {
-    return this.userRepository.find()
+    return this.userRepository.find();
   }
 
   findOne(id: number) {
-    return this.userRepository.findBy(id)
+    return this.userRepository.findBy(id);
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    return this.userRepository.update(id, updateUserDto)
+    return this.userRepository.update(id, updateUserDto);
   }
 
   remove(id: number) {
-    return this.userRepository.delete(id)
+    return this.userRepository.delete(id);
   }
 }
