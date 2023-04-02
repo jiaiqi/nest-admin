@@ -12,7 +12,7 @@ export class PaginationParamsDto {
   @IsOptional()
   @Min(0)
   @Transform(({ value }) => parseInt(value, 10), { toClassOnly: true })
-  pageSize = 5;
+  size = 5;
 
   @ApiPropertyOptional({
     description: '当前页,默认为1',
@@ -23,7 +23,7 @@ export class PaginationParamsDto {
   @IsOptional()
   @Min(1)
   @Transform(({ value }) => parseInt(value, 10), { toClassOnly: true })
-  page = 1;
+  current = 1;
 }
 
 export class PaginationParams2Dto {

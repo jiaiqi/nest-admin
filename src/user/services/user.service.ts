@@ -22,13 +22,12 @@ export class UserService {
     return this.userRespository.save({ ...user });
   }
 
-  async findAll({ page, pageSize }): Promise<{ data: User[]; count: number }> {
-    console.log(page);
-
+  async findAll({ current, size }): Promise<{ data: User[]; count: number }> {
+    console.log(current, size);
     const [data, count] = await this.userRespository.findAndCount({
       order: { createAt: 'DESC' },
-      skip: (page - 1) * pageSize,
-      take: pageSize * 1,
+      skip: (current - 1) * size,
+      take: size * 1,
       cache: true,
     });
     return { data, count };

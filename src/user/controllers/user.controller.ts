@@ -55,8 +55,8 @@ export class UserController {
       data,
       meta: {
         total: count,
-        pageSize: Number(query.pageSize),
-        page: Number(query.page),
+        size: Number(query.size),
+        current: Number(query.current),
       },
     };
   }
@@ -80,7 +80,7 @@ export class UserController {
       page: {
         total: count,
         size: Number(page.size),
-        page: Number(page.current),
+        current: Number(page.current),
       },
     };
   }
