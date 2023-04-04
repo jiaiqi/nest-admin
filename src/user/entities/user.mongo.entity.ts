@@ -1,90 +1,38 @@
-import { Entity, Column, Unique, UpdateDateColumn, ObjectIdColumn, CreateDateColumn, ManyToMany, JoinTable, OneToOne, PrimaryColumn, VersionColumn } from 'typeorm';
-import { ObjectId } from 'mongoose';
+import { Entity, Column } from 'typeorm';
+import { Common } from '@/shared/entities/common.entity';
 
+// Entity-将模型标记为实体。 实体是一个转换为数据库表的类
 @Entity()
-export class User {
+export class User extends Common {
+  // 昵称
+  @Column('text')
+  name: string;
 
-    // 昵称
-    @Column('text')
-    name: string;
+  // 头像
+  @Column('text')
+  avatar: string;
 
-    // 头像
-    @Column('text')
-    avatar: string;
+  // @Unique('email', ['email'])
+  @Column({ length: 200 })
+  email: string;
 
-    // @Unique('email', ['email'])
-    @Column({ length: 200 })
-    email: string;
+  @Column()
+  password: string;
 
-    // 手机号
-    @Column('text')
-    phoneNumber: string;
+  // 手机号
+  @Column('text')
+  phone: string;
 
-    @Column()
-    password: string;
+  @Column('boolean')
+  verified: boolean;
 
-    @Column()
-    role?: ObjectId
+  // 加密盐
+  @Column({
+    type: 'text',
+    select: false,
+  })
+  salt: string;
 
-    @Column()
-    job: string;
-
-    @Column()
-    jobName: string;
-
-    @Column()
-    organization: string;
-
-    @Column()
-    organizationName: string;
-
-    @Column()
-    location: string;
-
-    @Column()
-    locationName: string;
-
-    @Column()
-    introduction: string;
-
-    @Column()
-    personalWebsite: string;
-
-    @Column("boolean")
-    verified: boolean;
-
-    // 加密盐
-    @Column({
-        type: 'text',
-        select: false,
-    })
-    salt: string;
-
-    @Column()
-    isAccountDisabled?: boolean;
-
-    // 主键
-    @ObjectIdColumn()
-    _id: string
-
-    // 创建时间
-    @CreateDateColumn()
-    createdAt: Date
-
-    // 更新时间
-    @UpdateDateColumn()
-    updatedAt: Date
-
-    // 软删除
-    @Column({
-        default: false,
-        select: false,
-    })
-    isDelete: boolean
-
-    // 更新次数
-    @VersionColumn({
-        select: false
-    })
-    version: number
+  @Column()
+  isAccountDisabled?: boolean;
 }
