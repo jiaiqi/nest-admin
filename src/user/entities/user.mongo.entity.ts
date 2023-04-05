@@ -1,5 +1,6 @@
-import { Entity, Column, ObjectID } from 'typeorm';
+import { Entity, Column } from 'typeorm';
 import { Common } from '@/shared/entities/common.entity';
+import { ObjectId } from 'mongoose';
 
 // Entity-将模型标记为实体。 实体是一个转换为数据库表的类
 @Entity()
@@ -24,5 +25,5 @@ export class User extends Common {
   phone: string;
 
   @Column()
-  role?: ObjectID
+  role?: ObjectId
 }
