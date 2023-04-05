@@ -82,14 +82,13 @@ export class RoleController {
         }
     }
 
-    @ApiBearerAuth()
+    // @ApiBearerAuth()
     @ApiOperation({
         summary: '删除单个角色',
     })
     @ApiResponse({
         status: HttpStatus.NO_CONTENT,
     })
-    @ApiBearerAuth()
     @Delete(':id')
     remove(@Param('id') id: string) {
         return this.RoleService.remove(id);
