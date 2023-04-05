@@ -1,4 +1,4 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, ObjectID } from 'typeorm';
 import { Common } from '@/shared/entities/common.entity';
 
 // Entity-将模型标记为实体。 实体是一个转换为数据库表的类
@@ -23,16 +23,6 @@ export class User extends Common {
   @Column('text')
   phone: string;
 
-  @Column('boolean')
-  verified: boolean;
-
-  // 加密盐
-  @Column({
-    type: 'text',
-    select: false,
-  })
-  salt: string;
-
   @Column()
-  isAccountDisabled?: boolean;
+  role?: ObjectID
 }
