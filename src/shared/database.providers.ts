@@ -24,6 +24,7 @@ export const DatabaseProvider = [
         entities: [
           path.join(__dirname, '../../**/entities/*.mongo.entity{.ts,.js}'),
         ],
+        useUnifiedTopology: true
       };
 
       const dataSource = new DataSource(config);

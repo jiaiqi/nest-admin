@@ -1,10 +1,11 @@
 import { PaginationParamsDto } from "@/shared/dtos/pagination-params.dto";
-import { Body, Delete, Get, HttpStatus, Param, Patch, Post, Query } from "@nestjs/common";
-import { ApiBearerAuth, ApiOperation, ApiResponse } from "@nestjs/swagger";
+import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Query } from "@nestjs/common";
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { CreateRoleDto } from "../dtos/role.dto";
 import { RoleService } from "../services/role.service";
 
-
+@Controller('role')
+@ApiTags('角色管理')
 export class RoleController {
     constructor(
         private readonly RoleService: RoleService
