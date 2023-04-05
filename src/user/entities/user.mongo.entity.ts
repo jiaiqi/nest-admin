@@ -26,4 +26,8 @@ export class User extends Common {
 
   @Column()
   role?: ObjectId
+
+  //加盐
+  @Column()
+  salt: string
 }

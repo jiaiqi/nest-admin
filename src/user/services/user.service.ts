@@ -1,3 +1,4 @@
+import { encryptPassword, makeSalt } from '@/shared/utils/cryptogram.util';
 import { Inject, Injectable } from '@nestjs/common';
 import { AppLogger } from 'src/shared/logger/logger.service';
 import { SystemService } from 'src/shared/system.service';
@@ -18,6 +19,12 @@ export class UserService {
   }
 
   create(user: CreateUserDto) {
+    // 加密处理
+    if (user.password) {
+      const { salt, hashPassword } = this.getPassword(user.password)
+      user.salt = salt
+      user.password = hashPassword
+    }
     return this.userRepository.save({ ...user });
   }
 
@@ -66,15 +73,29 @@ export class UserService {
     return await this.userRepository.findOneBy(id);
   }
 
-  async update(id: string, user: UpdateUserDto) {
+  async update(id: string, user: CreateUserDto) {
     let post = await this.userRepository.findOneBy(id);
-    post = { ...post, ...user };
-    await this.userRepository.save(post);
+    user = { ...post, ...user };
+    // 加密处理
+    if (user.password) {
+      const { salt, hashPassword } = this.getPassword(user.password)
+      user.salt = salt
+      user.password = hashPassword
+    }
+    await this.userRepository.save(user);
     return await this.userRepository.findOneBy(id);
     // return await this.userRespository.update(id, user);
   }
 
   async remove(id: string): Promise<any> {
     return await this.userRepository.delete(id);
+  }
+
+  getPassword(password) {
+    const salt = makeSalt()
+    const hashPassword = encryptPassword(password, salt)
+    return {
+      salt, hashPassword
+    }
   }
 }

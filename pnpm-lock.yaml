@@ -19,9 +19,11 @@ specifiers:
   '@typescript-eslint/parser': ^5.0.0
   class-transformer: ^0.5.1
   class-validator: ^0.14.0
+  crypto: ^1.0.1
   eslint: ^8.0.1
   eslint-config-prettier: ^8.3.0
   eslint-plugin-prettier: ^4.0.0
+  express: ^4.17.1
   jest: 29.3.1
   mongodb: ^3.6.0
   mongoose: ^7.0.2
@@ -50,13 +52,15 @@ dependencies:
   '@nestjs/swagger': 6.2.1_wyaadnjofczeax4mlaw2u3iwam
   class-transformer: 0.5.1
   class-validator: 0.14.0
+  crypto: 1.0.1
+  express: 4.18.2
   mongodb: 3.7.3
   mongoose: 7.0.2
   mysql2: 3.2.0
-  nest-knife4j: 1.0.1_@types+express@4.17.17
+  nest-knife4j: 1.0.1_ggo4t6aanj3kpaprsqb37ppxvm
   reflect-metadata: 0.1.13
   rxjs: 7.8.0
-  swagger-ui-express: 4.6.2
+  swagger-ui-express: 4.6.2_express@4.18.2
   typeorm: 0.3.11_yaz4xvsulzmkxnv4dyc7n26xge
   winston: 3.8.2
 
@@ -3540,6 +3544,11 @@ packages:
     resolution: {integrity: sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==}
     dev: true
 
+  /crypto/1.0.1:
+    resolution: {integrity: sha512-VxBKmeNcqQdiUQUW2Tzq0t377b54N2bMtXO/qiLa+6eRRmmC4qT3D4OnTGoT/U6O9aklQ/jTwbOtRMTTY8G0Ig==}
+    deprecated: This package is no longer supported. It's now a built-in Node module. If you've depended on crypto, you should switch to the one that's built-in.
+    dev: false
+
   /css-select/5.1.0:
     resolution: {integrity: sha512-nwoRF1rvRRnnCqqY7updORDsuqKzqYJ28+oSMaJMMgOauh3fvwHqMS7EZpIPqK8GL+g9mKxF1vP/ZjSeNjEVHg==}
     dependencies:
@@ -5913,13 +5922,14 @@ packages:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: true
 
-  /nest-knife4j/1.0.1_@types+express@4.17.17:
+  /nest-knife4j/1.0.1_ggo4t6aanj3kpaprsqb37ppxvm:
     resolution: {integrity: sha512-TD1LmxzclBddOygIDIRjr3jIwj+C3dp69G4Sy+QwAiiuQQQAxwaGXioCB3ibr/SLQ9nuR8klYehzS3HjS32Nfw==}
     peerDependencies:
       '@types/express': ^4.17.11
       express: ^4.17.1
     dependencies:
       '@types/express': 4.17.17
+      express: 4.18.2
       user: 0.0.0
     dev: false
 
@@ -7031,12 +7041,13 @@ packages:
     resolution: {integrity: sha512-V3eIa28lwB6gg7/wfNvAbjwJYmDXy1Jo1POjyTzlB6wPcHiGlRxq39TSjYGVjQrUSAzpv+a7nzp7mDxgNy57xA==}
     dev: false
 
-  /swagger-ui-express/4.6.2:
+  /swagger-ui-express/4.6.2_express@4.18.2:
     resolution: {integrity: sha512-MHIOaq9JrTTB3ygUJD+08PbjM5Tt/q7x80yz9VTFIatw8j5uIWKcr90S0h5NLMzFEDC6+eVprtoeA5MDZXCUKQ==}
     engines: {node: '>= v0.10.32'}
     peerDependencies:
       express: '>=4.0.0'
     dependencies:
+      express: 4.18.2
       swagger-ui-dist: 4.15.5
     dev: false
 

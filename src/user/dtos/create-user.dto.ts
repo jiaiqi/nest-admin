@@ -30,4 +30,7 @@ export class CreateUserDto {
     example: 'jiaqi',
   })
   name: string;
+
+  // 加盐
+  salt: string
 }
