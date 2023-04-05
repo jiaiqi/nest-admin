@@ -9,19 +9,24 @@ import {
   HttpStatus,
   HttpException,
   Query,
+  Req,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { UserService } from '../services/user.service';
 import { CreateUserDto } from '../dtos/create-user.dto';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiConsumes, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { PaginationParamsDto } from '@/shared/dtos/pagination-params.dto';
 import { QueryBodyDto } from '@/shared/dtos/query-body-dto';
+import { UploadDTO } from '../dtos/upload.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('user')
 @ApiTags('用户管理')
 export class UserController {
   constructor(
     private readonly userService: UserService, // 注入环境变量 // private readonly configService: ConfigService
-  ) {}
+  ) { }
 
   @Post('/create')
   @ApiOperation({
@@ -131,5 +136,21 @@ export class UserController {
   @Delete(':id')
   async remove(@Param('id') id: string) {
     return await this.userService.remove(id);
+  }
+
+  @Post('/upload')
+  @ApiOperation({
+    summary: '上传文件',
+  })
+  @ApiConsumes('multipart/form-data')
+  @UseInterceptors(FileInterceptor('file'))
+  async upload(
+    @Req() req: any,
+    @Body() uploadDto: UploadDTO,
+    @UploadedFile() file
+  ) {
+    console.log('upload,', file
+    );
+
   }
 }
