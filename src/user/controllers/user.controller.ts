@@ -20,6 +20,7 @@ import { PaginationParamsDto } from '@/shared/dtos/pagination-params.dto';
 import { QueryBodyDto } from '@/shared/dtos/query-body-dto';
 import { UploadDTO } from '../dtos/upload.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { encryptFileMD5 } from '@/shared/utils/cryptogram.util';
 
 @Controller('user')
 @ApiTags('用户管理')
@@ -149,8 +150,8 @@ export class UserController {
     @Body() uploadDto: UploadDTO,
     @UploadedFile() file
   ) {
-    console.log('upload,', file
-    );
+    console.log('upload,', file);
+    console.log('hash:', encryptFileMD5(file.buffer));
 
   }
 }
