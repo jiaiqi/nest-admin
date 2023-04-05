@@ -1,3 +1,4 @@
+import { UploadService } from '@/shared/upload/upload.service';
 import { encryptPassword, makeSalt } from '@/shared/utils/cryptogram.util';
 import { Inject, Injectable } from '@nestjs/common';
 import { AppLogger } from 'src/shared/logger/logger.service';
@@ -14,6 +15,7 @@ export class UserService {
     @Inject('USER_REPOSITORY')
     private readonly userRepository: MongoRepository<User>,
     private readonly logger: AppLogger,
+    private readonly uploadService: UploadService
   ) {
     this.logger.setContext(UserService.name);
   }
@@ -91,6 +93,12 @@ export class UserService {
     return await this.userRepository.delete(id);
   }
 
+
+  async uploadAvatar(file) {
+    const { url } = await this.uploadService.upload(file)
+    return { data: url }
+  }
+
   getPassword(password) {
     const salt = makeSalt()
     const hashPassword = encryptPassword(password, salt)
@@ -98,4 +106,6 @@ export class UserService {
       salt, hashPassword
     }
   }
+
+
 }

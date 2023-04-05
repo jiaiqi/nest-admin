@@ -152,6 +152,6 @@ export class UserController {
   ) {
     console.log('upload,', file);
     console.log('hash:', encryptFileMD5(file.buffer));
-
+    return this.userService.uploadAvatar(file)
   }
 }
