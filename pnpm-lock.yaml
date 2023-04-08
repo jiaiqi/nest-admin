@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@compodoc/compodoc': ^1.1.19
+  '@nestjs-modules/ioredis': ^1.0.1
   '@nestjs/cli': ^9.0.0
   '@nestjs/common': ^9.0.0
   '@nestjs/config': ^2.3.1
@@ -50,6 +51,7 @@ specifiers:
   winston: ^3.8.2
 
 dependencies:
+  '@nestjs-modules/ioredis': 1.0.1_7ftkheainf6elxr73aabueoaxm
   '@nestjs/common': 9.3.10_welcnyot5bzd5wa2aovbkxpi4i
   '@nestjs/config': 2.3.1_z7yklwa5kpd33rbhggxjjac2ei
   '@nestjs/core': 9.3.10_vtqjm4aysb2lmvp3b3whe7oj4e
@@ -1918,6 +1920,17 @@ packages:
   /@lukeed/csprng/1.0.1:
     resolution: {integrity: sha512-uSvJdwQU5nK+Vdf6zxcWAY2A8r7uqe+gePwLWzJ+fsQehq18pc0I2hJKwypZ2aLM90+Er9u1xn4iLJPZ+xlL4g==}
     engines: {node: '>=8'}
+
+  /@nestjs-modules/ioredis/1.0.1_7ftkheainf6elxr73aabueoaxm:
+    resolution: {integrity: sha512-UhIOqL5pXeJlCucHMkJONwqecvLFySW/95uw34Umh0ld7v+6tvYRK3JHQYcJqzlmNiq52bfNxf7CUpuHCSdA3A==}
+    peerDependencies:
+      '@nestjs/common': ^6.7.0 || ^7.0.0 || ^8.0.0
+      '@nestjs/core': ^6.7.0 || ^7.0.0 || ^8.0.0
+      ioredis: ^4.0.0
+    dependencies:
+      '@nestjs/common': 9.3.10_welcnyot5bzd5wa2aovbkxpi4i
+      '@nestjs/core': 9.3.10_vtqjm4aysb2lmvp3b3whe7oj4e
+    dev: false
 
   /@nestjs/cli/9.2.0:
     resolution: {integrity: sha512-6B1IjDcJbrOu55oMF67L1x5lDUOZ3Zs9l7bKCBH9D78965m8wq/2rlEWl/gJto5TABLQWy3hVvV/s8VzUlRMxw==}
