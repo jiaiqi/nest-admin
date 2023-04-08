@@ -4,15 +4,19 @@ import { User } from "../entities/user.mongo.entity";
 import { Inject, NotFoundException } from "@nestjs/common";
 import { MongoRepository } from "typeorm";
 import { encryptPassword } from "@/shared/utils/cryptogram.util";
-import { UserInfoDto } from "../dtos/auth.dto";
+import { RegisterCodeDTO, UserInfoDto } from "../dtos/auth.dto";
 import { Role } from "../entities/role.mongo.entity";
+import { InjectRedis, Redis } from "@nestjs-modules/ioredis";
+
 export class AuthService {
     constructor(
         private readonly jwtService: JwtService,
         @Inject("USER_REPOSITORY")
         private userRepository: MongoRepository<User>,
         @Inject("ROLE_REPOSITORY")
-        private roleRepository:MongoRepository<Role>
+        private roleRepository: MongoRepository<Role>,
+        @InjectRedis()
+        private readonly redis: Redis,
     ) { }
 
     async certificate(user: User) {
@@ -58,10 +62,47 @@ export class AuthService {
         const user = await this.userRepository.findOneBy(id)
         const data: UserInfoDto = Object.assign({}, user)
         if (user.role) {
-          const role = await this.roleRepository.findOneBy(user.role)
-          if (role) data.permissions = role.permissions
+            const role = await this.roleRepository.findOneBy(user.role)
+            if (role) data.permissions = role.permissions
         }
         return data
-    
-      }
+
+    }
+
+
+    /**
+     * 获取验证码（四位随机数字）
+     * @returns 
+     */
+    generateCode() {
+        return [0, 0, 0, 0].map(() => (parseInt(Math.random() * 10 + ''))).join('')
+    }
+    /**
+      * 获取短信验证码
+      * @param mobile 
+      */
+    async registerCode(dto: RegisterCodeDTO) {
+
+        const redisData = await this.getMobileVerifyCode(dto.phone);
+        if (redisData !== null) {
+            // 验证码未过期
+            // 重复发送
+            throw new NotFoundException('验证码未过期,无需再次发送')
+        }
+
+        // TODO 测试状态
+        const code = this.generateCode()
+        // const code = '0000'
+        // this.logger.log(null, '生成验证码：' + code)
+        console.log('生成验证码：' + code);
+        
+        await this.redis.set('verifyCode' + dto.phone, code, "EX", 60);
+
+        return code
+    }
+
+    async getMobileVerifyCode(mobile) {
+        return await this.redis.get('verifyCode' + mobile);
+    }
+
 }

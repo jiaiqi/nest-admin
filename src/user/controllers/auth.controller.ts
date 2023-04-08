@@ -4,6 +4,7 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagg
 import { LoginDTO } from "../dtos/login.dto";
 import { AuthService } from "../services/auth.service";
 import { AuthGuard } from '@nestjs/passport'
+import { RegisterCodeDTO } from "../dtos/auth.dto";
 @ApiTags('认证鉴权')
 @Controller('auth')
 export class AuthController {
@@ -48,6 +49,26 @@ export class AuthController {
         return {
             ok: 1,
             info
+        }
+    }
+
+    @ApiOperation({
+        summary: '短信验证码',
+    })
+    @ApiResponse({
+        status: HttpStatus.OK,
+        // type: SwaggerBaseApiResponse(UserInfoDto),
+    })
+    @ApiResponse({
+        status: HttpStatus.NOT_FOUND,
+        // type: BaseApiErrorResponse,
+    })
+    @Post('registerCode')
+    async registerCode(@Body() registerCodeDto: RegisterCodeDTO,): Promise<any> {
+        const code = await this.authService.registerCode(registerCodeDto)
+        return {
+            msg: '验证码已生成',
+            data: { code }
         }
     }
 }

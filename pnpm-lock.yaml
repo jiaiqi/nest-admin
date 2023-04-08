@@ -29,6 +29,7 @@ specifiers:
   eslint-plugin-prettier: ^4.0.0
   express: ^4.17.1
   fs-extra: ^11.1.1
+  ioredis: ^4.0.0
   jest: 29.3.1
   mongodb: ^3.6.0
   mongoose: ^7.0.2
@@ -51,7 +52,7 @@ specifiers:
   winston: ^3.8.2
 
 dependencies:
-  '@nestjs-modules/ioredis': 1.0.1_7ftkheainf6elxr73aabueoaxm
+  '@nestjs-modules/ioredis': 1.0.1_vv22vuaxxy3puezg6zajz7vbzy
   '@nestjs/common': 9.3.10_welcnyot5bzd5wa2aovbkxpi4i
   '@nestjs/config': 2.3.1_z7yklwa5kpd33rbhggxjjac2ei
   '@nestjs/core': 9.3.10_vtqjm4aysb2lmvp3b3whe7oj4e
@@ -66,6 +67,7 @@ dependencies:
   crypto: 1.0.1
   express: 4.18.2
   fs-extra: 11.1.1
+  ioredis: 4.28.5
   mongodb: 3.7.3
   mongoose: 7.0.2
   mysql2: 3.2.0
@@ -75,7 +77,7 @@ dependencies:
   reflect-metadata: 0.1.13
   rxjs: 7.8.0
   swagger-ui-express: 4.6.2_express@4.18.2
-  typeorm: 0.3.11_yaz4xvsulzmkxnv4dyc7n26xge
+  typeorm: 0.3.11_yjapx525drdcgphrhj7uvqkbbq
   winston: 3.8.2
 
 devDependencies:
@@ -1921,7 +1923,7 @@ packages:
     resolution: {integrity: sha512-uSvJdwQU5nK+Vdf6zxcWAY2A8r7uqe+gePwLWzJ+fsQehq18pc0I2hJKwypZ2aLM90+Er9u1xn4iLJPZ+xlL4g==}
     engines: {node: '>=8'}
 
-  /@nestjs-modules/ioredis/1.0.1_7ftkheainf6elxr73aabueoaxm:
+  /@nestjs-modules/ioredis/1.0.1_vv22vuaxxy3puezg6zajz7vbzy:
     resolution: {integrity: sha512-UhIOqL5pXeJlCucHMkJONwqecvLFySW/95uw34Umh0ld7v+6tvYRK3JHQYcJqzlmNiq52bfNxf7CUpuHCSdA3A==}
     peerDependencies:
       '@nestjs/common': ^6.7.0 || ^7.0.0 || ^8.0.0
@@ -1930,6 +1932,7 @@ packages:
     dependencies:
       '@nestjs/common': 9.3.10_welcnyot5bzd5wa2aovbkxpi4i
       '@nestjs/core': 9.3.10_vtqjm4aysb2lmvp3b3whe7oj4e
+      ioredis: 4.28.5
     dev: false
 
   /@nestjs/cli/9.2.0:
@@ -3420,6 +3423,11 @@ packages:
     engines: {node: '>=0.8'}
     dev: true
 
+  /cluster-key-slot/1.1.2:
+    resolution: {integrity: sha512-RMr0FhtfXemyinomL4hrWcYJxmX6deFdCxpJzhDttxgO1+bcCnkk+9drydLVDmAMG7NE6aN/fl4F7ucU/90gAA==}
+    engines: {node: '>=0.10.0'}
+    dev: false
+
   /co/4.6.0:
     resolution: {integrity: sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ==}
     engines: {iojs: '>= 1.0.0', node: '>= 0.12.0'}
@@ -4881,6 +4889,25 @@ packages:
     engines: {node: '>= 0.10'}
     dev: true
 
+  /ioredis/4.28.5:
+    resolution: {integrity: sha512-3GYo0GJtLqgNXj4YhrisLaNNvWSNwSS2wS4OELGfGxH8I69+XfNdnmV1AyN+ZqMh0i7eX+SWjrwFKDBDgfBC1A==}
+    engines: {node: '>=6'}
+    dependencies:
+      cluster-key-slot: 1.1.2
+      debug: 4.3.4
+      denque: 1.5.1
+      lodash.defaults: 4.2.0
+      lodash.flatten: 4.4.0
+      lodash.isarguments: 3.1.0
+      p-map: 2.1.0
+      redis-commands: 1.7.0
+      redis-errors: 1.2.0
+      redis-parser: 3.0.0
+      standard-as-callback: 2.1.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /ip/2.0.0:
     resolution: {integrity: sha512-WKa+XuLG1A1R0UWhl2+1XQSi+fZWMsYKffMZTTYsiZaUD8k2yDAj5atimTUD2TZkyCkNEeYE5NhFZmupOGtjYQ==}
     dev: false
@@ -5631,6 +5658,18 @@ packages:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
     dev: true
 
+  /lodash.defaults/4.2.0:
+    resolution: {integrity: sha512-qjxPLHd3r5DnsdGacqOMU6pb/avJzdh9tFX2ymgoZE27BmjXrNy/y4LoaiTeAb+O3gL8AfpJGtqfX/ae2leYYQ==}
+    dev: false
+
+  /lodash.flatten/4.4.0:
+    resolution: {integrity: sha512-C5N2Z3DgnnKr0LOpv/hKCgKdb7ZZwafIrsesve6lmzvZIRZRGaZ/l6Q8+2W7NaT+ZwO3fFlSCzCzrDCFdJfZ4g==}
+    dev: false
+
+  /lodash.isarguments/3.1.0:
+    resolution: {integrity: sha512-chi4NHZlZqZD18a0imDHnZPrDeBbTtVN7GXMwuGdRH9qotxAjYs3aVLKc7zNOG9eddR5Ksd8rvFEBc9SsggPpg==}
+    dev: false
+
   /lodash.memoize/4.1.2:
     resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==}
     dev: true
@@ -6239,6 +6278,11 @@ packages:
       p-limit: 3.1.0
     dev: true
 
+  /p-map/2.1.0:
+    resolution: {integrity: sha512-y3b8Kpd8OAN444hxfBbFfj1FY/RjtTd8tzYwhUqNYXx0fXx2iX4maP4Qr6qhIKbQXI02wTLAda4fYUbDagTUFw==}
+    engines: {node: '>=6'}
+    dev: false
+
   /p-try/2.2.0:
     resolution: {integrity: sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==}
     engines: {node: '>=6'}
@@ -6577,6 +6621,22 @@ packages:
     dependencies:
       resolve: 1.22.1
     dev: true
+
+  /redis-commands/1.7.0:
+    resolution: {integrity: sha512-nJWqw3bTFy21hX/CPKHth6sfhZbdiHP6bTawSgQBlKOVRG7EZkfHbbHwQJnrE4vsQf0CMNE+3gJ4Fmm16vdVlQ==}
+    dev: false
+
+  /redis-errors/1.2.0:
+    resolution: {integrity: sha512-1qny3OExCf0UvUV/5wpYKf2YwPcOqXzkwKKSmKHiE6ZMQs5heeE/c8eXK+PNllPvmjgAbfnsbpkGZWy8cBpn9w==}
+    engines: {node: '>=4'}
+    dev: false
+
+  /redis-parser/3.0.0:
+    resolution: {integrity: sha512-DJnGAeenTdpMEH6uAJRK/uiyEIH9WVsUmoLwzudwGJUwZPp80PDBWPHXSAGNPwNvIXAbe7MSUB1zQFugFml66A==}
+    engines: {node: '>=4'}
+    dependencies:
+      redis-errors: 1.2.0
+    dev: false
 
   /reflect-metadata/0.1.13:
     resolution: {integrity: sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==}
@@ -7008,6 +7068,10 @@ packages:
     dependencies:
       escape-string-regexp: 2.0.0
     dev: true
+
+  /standard-as-callback/2.1.0:
+    resolution: {integrity: sha512-qoRRSyROncaz1z0mvYqIE4lCd9p2R90i6GxW3uZv5ucSu8tU7B5HXUP1gG8pVZsYNVaXjk8ClXHPttLyxAL48A==}
+    dev: false
 
   /static-eval/2.1.0:
     resolution: {integrity: sha512-agtxZ/kWSsCkI5E4QifRwsaPs0P0JmZV6dkLz6ILYfFYQGn+5plctanRN+IC8dJRiFkyXHrwEE3W9Wmx67uDbw==}
@@ -7493,7 +7557,7 @@ packages:
   /typedarray/0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
 
-  /typeorm/0.3.11_yaz4xvsulzmkxnv4dyc7n26xge:
+  /typeorm/0.3.11_yjapx525drdcgphrhj7uvqkbbq:
     resolution: {integrity: sha512-pzdOyWbVuz/z8Ww6gqvBW4nylsM0KLdUCDExr2gR20/x1khGSVxQkjNV/3YqliG90jrWzrknYbYscpk8yxFJVg==}
     engines: {node: '>= 12.9.0'}
     hasBin: true
@@ -7560,6 +7624,7 @@ packages:
       debug: 4.3.4
       dotenv: 16.0.3
       glob: 7.2.3
+      ioredis: 4.28.5
       js-yaml: 4.1.0
       mkdirp: 1.0.4
       mongodb: 3.7.3
