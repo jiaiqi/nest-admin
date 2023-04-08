@@ -16,6 +16,7 @@ export class AuthService {
             id: user._id,
         }
         const token = this.jwtService.sign(payload)
+        return token
     }
 
     async checkLoginForm(loginDTO: LoginDTO) {

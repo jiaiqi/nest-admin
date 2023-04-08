@@ -8,6 +8,7 @@ import { RoleService } from './services/role.service';
 import { AuthService } from './services/auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { AuthController } from './controllers/auth.controller';
 
 @Module({
   imports: [ShareModule,
@@ -18,7 +19,7 @@ import { ConfigService } from '@nestjs/config';
       useFactory: (configService: ConfigService) => configService.get('jwt')
     })
   ],
-  controllers: [UserController, RoleController],
+  controllers: [UserController, RoleController, AuthController],
   providers: [UserService, ...UserProviders, RoleService, AuthService],
   exports: [UserService],
 })

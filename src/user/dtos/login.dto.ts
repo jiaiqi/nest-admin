@@ -9,13 +9,13 @@ export class LoginDTO {
    */
   @Matches(regMobileCN, { message: '请输入正确手机号' })
   @IsNotEmpty({ message: '请输入手机号' })
-  @ApiProperty({ example: '18888888888' })
+  @ApiProperty({ example: '15191803240' })
   readonly phone: string;
 
   /**
    * 用户密码
    */
   @IsNotEmpty({ message: '请输入密码' })
-  @ApiProperty({ example: '888888' })
+  @ApiProperty({ example: '123456' })
   readonly password: string;
 }
