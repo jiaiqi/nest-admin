@@ -5,10 +5,12 @@ import { DatabaseProvider } from './database.providers';
 import { AppLoggerModule } from './logger/logger.module';
 import { SystemService } from './system.service';
 import { UploadService } from './upload/upload.service';
+import { CaptchaService } from './captcha/captcha.service';
 
 @Module({
-  exports: [SystemService, ConfigModule, AppLoggerModule, ...DatabaseProvider, UploadService],
-  providers: [SystemService, ...DatabaseProvider, UploadService],
+  exports: [SystemService, ConfigModule, AppLoggerModule,
+    ...DatabaseProvider, UploadService, CaptchaService],
+  providers: [SystemService, ...DatabaseProvider, UploadService, CaptchaService],
   imports: [ConfigModule.forRoot(configModuleOptions), AppLoggerModule],
 })
 export class ShareModule { }
