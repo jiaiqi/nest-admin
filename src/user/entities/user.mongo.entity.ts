@@ -1,6 +1,7 @@
 import { Entity, Column } from 'typeorm';
 import { Common } from '@/shared/entities/common.entity';
 import { ObjectId } from 'mongoose';
+import { Exclude } from 'class-transformer';
 
 // Entity-将模型标记为实体。 实体是一个转换为数据库表的类
 @Entity()
@@ -28,6 +29,8 @@ export class User extends Common {
   role?: ObjectId
 
   //加盐
-  @Column()
+  @Column({
+    select:false,
+  })
   salt: string
 }
