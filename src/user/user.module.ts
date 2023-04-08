@@ -13,10 +13,9 @@ import { ConfigService } from '@nestjs/config';
   imports: [ShareModule,
     JwtModule.registerAsync({
       inject: [ConfigService],
-      imports: [ShareModule],
-      useFactory: (configService: ConfigService) => {
-        return configService.get('jwt')
-      }
+      imports: [ShareModule
+      ],
+      useFactory: (configService: ConfigService) => configService.get('jwt')
     })
   ],
   controllers: [UserController, RoleController],

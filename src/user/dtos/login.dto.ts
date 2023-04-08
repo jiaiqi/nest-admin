@@ -10,7 +10,7 @@ export class LoginDTO {
   @Matches(regMobileCN, { message: '请输入正确手机号' })
   @IsNotEmpty({ message: '请输入手机号' })
   @ApiProperty({ example: '18888888888' })
-  readonly phoneNumber: string;
+  readonly phone: string;
 
   /**
    * 用户密码
