@@ -44,7 +44,6 @@ export class AuthController {
     @Get('info')
     @UseGuards(AuthGuard('jwt'))
     async info(@Req() req: any): Promise<any> {
-        console.log('user id :', req.user.id);
         const info = await this.authService.info(req.user.id)
         return {
             ok: 1,

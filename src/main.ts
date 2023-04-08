@@ -4,6 +4,7 @@ import { generateDocument } from './doc';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { ValidationPipe } from '@nestjs/common';
 import { join } from 'path';
+import { RemoveSensitiveInfoInterceptor } from './shared/interceptors/remove-sensitive-info.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -11,6 +12,9 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({
     forbidUnknownValues: false
   }))
+
+  // 全局拦截器
+  app.useGlobalInterceptors(new RemoveSensitiveInfoInterceptor())
 
   const uploadDir = (!!process.env.UPLOAD_DIR && process.env.UPLOAD_DIR !== '') ? process.env.UPLOAD_DIR : join(__dirname, '../../..', 'static/upload')
   app.useStaticAssets(uploadDir, {
