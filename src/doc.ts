@@ -13,14 +13,14 @@ export const generateDocument = (app) => {
 
   const document = SwaggerModule.createDocument(app, options);
 
-  SwaggerModule.setup('/api/doc', app, document);
+  SwaggerModule.setup('/', app, document);
 
   knife4jSetup(app, [
     {
       name: packageConfig.version,
-      url: `/api/doc-json`,
+      url: `/-json`,
       swaggerVersion: '3.0',
-      location: `/api/doc-json`,
+      location: `/-json`,
     },
   ]);
 };
