@@ -7,9 +7,11 @@ export class CaptchaService {
         const captcha = svgCaptcha.create({  //可配置返回的图片信息
             size, //生成几个验证码
             fontSize: 50, //文字大小
+            noise: 1,// 干扰线条的数量
             width: 100,  //宽度
             height: 34,  //高度
-            background: '#cc9966',  //背景颜色
+            color: true, // 验证码的字符是否有颜色，默认没有，如果设定了背景，则默认有
+            background: '#1f94ff',  //背景颜色
         });
         return captcha;
     }

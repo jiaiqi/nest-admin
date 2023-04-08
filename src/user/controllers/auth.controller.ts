@@ -5,6 +5,7 @@ import { LoginDTO } from "../dtos/login.dto";
 import { AuthService } from "../services/auth.service";
 import { AuthGuard } from '@nestjs/passport'
 import { RegisterCodeDTO } from "../dtos/auth.dto";
+import { ValidCaptchaDto } from "@/shared/dtos/valid-captcha.dto";
 @ApiTags('认证鉴权')
 @Controller('auth')
 export class AuthController {
@@ -82,4 +83,15 @@ export class AuthController {
             data
         }
     }
+
+    @ApiOperation({
+        summary: '校验图形验证码',
+    })
+    @Post('validCaptcha')  //当请求该接口时，返回一张随机图片验证码
+    async validCaptcha(@Body() req: ValidCaptchaDto) {
+        const { id, text } = req
+        const result = await this.authService.validCaptcha(id, text)
+        return result
+    }
+
 }

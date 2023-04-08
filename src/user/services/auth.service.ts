@@ -17,7 +17,7 @@ export class AuthService {
         private roleRepository: MongoRepository<Role>,
         @InjectRedis()
         private readonly redis: Redis,
-        private readonly captchaService:CaptchaService
+        private readonly captchaService: CaptchaService
     ) { }
 
     async certificate(user: User) {
@@ -107,12 +107,11 @@ export class AuthService {
     }
 
     /**
- * 获取图形验证码
- */
+     * 获取图形验证码
+     */
     async getCaptcha() {
         const { data, text } = await this.captchaService.captche()
         const id = makeSalt(8)
-
         // this.logger.log(null, '图形验证码:' + text)
 
         // 验证码存入将Redis
@@ -121,6 +120,24 @@ export class AuthService {
         const image = `data:image/svg+xml;base64,${Buffer.from(data).toString('base64')}`
         return { id, image }
     }
-
-
+    /**
+     * 验证图形验证码
+     */
+    async validCaptcha(id, text) {
+        const dbText = await this.redis.get('captcha' + id);
+        const result = {
+            success: true,
+            msg: '校验成功',
+            code: '1000'
+        }
+        if (!dbText) {
+            result.code = '2000'
+            result.msg = '验证码已过期'
+        }
+        if (text !== dbText) {
+            result.code = '3000'
+            result.msg = '验证码不匹配'
+        }
+        return result
+    }
 }
