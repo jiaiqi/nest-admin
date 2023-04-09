@@ -38,7 +38,7 @@ export class MenuService {
 
   async update(data: UpdateMenuDto) {
     // 去除时间戳和id
-    ['_id', 'createdAt', 'updatedAt'].forEach(
+    ['_id', 'createAt', 'updatedAt'].forEach(
       k => delete data[k]
     )
     return await this.MenuRepository.updateOne({}, { $set: data }, { upsert: true })

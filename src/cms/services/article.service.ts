@@ -38,7 +38,7 @@ export class ArticleService {
 
     async update(id: string, course: UpdateArticleDto) {
         // 去除时间戳和id
-        ['_id', 'createdAt', 'updatedAt'].forEach(
+        ['_id', 'createAt', 'updatedAt'].forEach(
             k => delete course[k]
         )
         const ret = await this.articleRepository.update(id, course)

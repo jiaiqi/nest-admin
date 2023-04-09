@@ -4,7 +4,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { AppLogger } from 'src/shared/logger/logger.service';
 import { SystemService } from 'src/shared/system.service';
 import { MongoRepository } from 'typeorm';
-import { CreateUserDto } from '../dtos/create-user.dto';
+import { CreateUserDto } from '../dtos/user.dto';
 import { UpdateUserDto } from '../dtos/update-user.dto';
 import { User } from '../entities/user.mongo.entity';
 import { getPassword } from '@/shared/utils/user.util';
@@ -48,7 +48,7 @@ export class UserService {
     order,
     where,
   }): Promise<{ data: User[]; count: number }> {
-    // createdAt: "DESC"
+    // createAt: "DESC"
     let orderParams = {};
     if (Array.isArray(order) && order.length > 0) {
       order.forEach((item) => {
@@ -57,7 +57,7 @@ export class UserService {
     } else if (order) {
       orderParams = { ...order };
     } else {
-      orderParams = { createdAt: 'DESC' };
+      orderParams = { createAt: 'DESC' };
     }
 
     const [data, count] = await this.userRepository.findAndCount({

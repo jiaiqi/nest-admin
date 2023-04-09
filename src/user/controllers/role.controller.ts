@@ -1,9 +1,10 @@
 import { PaginationParamsDto } from "@/shared/dtos/pagination-params.dto";
-import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Query } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Query, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { CreateRoleDto } from "../dtos/role.dto";
 import { RoleService } from "../services/role.service";
 import { BaseApiErrorResponse } from "@/shared/dtos/base-api-response.dto";
+import { AuthGuard } from "@nestjs/passport";
 
 @Controller('role')
 @ApiTags('角色管理')
@@ -84,6 +85,7 @@ export class RoleController {
     }
 
     @ApiBearerAuth()
+    @UseGuards(AuthGuard('jwt'))
     @ApiOperation({
         summary: '删除单个角色',
     })

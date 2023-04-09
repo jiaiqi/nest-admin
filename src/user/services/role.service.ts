@@ -35,7 +35,7 @@ export class RoleService {
 
     async update(id: string, Role) {
         // 去除时间戳和id
-        ['_id', 'createdAt', 'updatedAt'].forEach(
+        ['_id', 'createAt', 'updatedAt'].forEach(
             k => delete Role[k]
         )
         // 更新时间戳

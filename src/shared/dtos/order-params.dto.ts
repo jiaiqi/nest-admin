@@ -4,9 +4,9 @@ export class OrderParamsDto {
   @ApiPropertyOptional({
     description: '排序字段',
     type: String,
-    example: 'createdAt',
+    example: 'createAt',
   })
-  field = 'createdAt';
+  field = 'createAt';
 
   @ApiPropertyOptional({
     description: '排序方式',

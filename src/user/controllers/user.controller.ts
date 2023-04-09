@@ -14,7 +14,7 @@ import {
   UploadedFile,
 } from '@nestjs/common';
 import { UserService } from '../services/user.service';
-import { CreateUserDto } from '../dtos/create-user.dto';
+import { CreateUserDto } from '../dtos/user.dto';
 import { ApiConsumes, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { PaginationParamsDto } from '@/shared/dtos/pagination-params.dto';
 import { QueryBodyDto } from '@/shared/dtos/query-body-dto';

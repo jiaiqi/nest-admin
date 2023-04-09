@@ -8,9 +8,9 @@ class OrderParams {
   // @ApiPropertyOptional({
   //     description: "排序字段",
   //     type: String,
-  //     example: 'createdAt'
+  //     example: 'createAt'
   // })
-  // column = 'createdAt';
+  // column = 'createAt';
   // @ApiPropertyOptional({
   //     description: "排序方式",
   //     type: String,
@@ -67,7 +67,7 @@ export class QueryBodyDto {
     description: '排序参数',
     type: Object,
     example: {
-      createdAt: 'ASC',
+      createAt: 'ASC',
     },
   })
   order: OrderParams;
