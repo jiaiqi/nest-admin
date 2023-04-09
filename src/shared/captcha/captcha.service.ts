@@ -13,6 +13,9 @@ export class CaptchaService {
             color: true, // 验证码的字符是否有颜色，默认没有，如果设定了背景，则默认有
             background: '#1f94ff',  //背景颜色
         });
+
+        console.log('图形验证码：',captcha.text);
+        
         return captcha;
     }
 }

@@ -54,7 +54,18 @@ export class AuthController {
     }
 
     @ApiOperation({
-        summary: '短信验证码',
+        summary: '生成图形验证码',
+    })
+    @Get('captcha')  //当请求该接口时，返回一张随机图片验证码
+    async getCaptcha() {
+        const data = await this.authService.getCaptcha()
+        return {
+            data
+        }
+    }
+
+    @ApiOperation({
+        summary: '模拟生成短信验证码（随机四位数字）',
     })
     @ApiResponse({
         status: HttpStatus.OK,
@@ -73,26 +84,17 @@ export class AuthController {
         }
     }
 
-    @ApiOperation({
-        summary: '生成图形验证码',
-    })
-    @Get('captcha')  //当请求该接口时，返回一张随机图片验证码
-    async getCaptcha() {
-        const data = await this.authService.getCaptcha()
-        return {
-            data
-        }
-    }
 
-    @ApiOperation({
-        summary: '校验图形验证码',
-    })
-    @Post('validCaptcha')  //当请求该接口时，返回一张随机图片验证码
-    async validCaptcha(@Body() req: ValidCaptchaDto) {
-        const { id, text } = req
-        const result = await this.authService.validCaptcha(id, text)
-        return result
-    }
+
+    // @ApiOperation({
+    //     summary: '校验图形验证码',
+    // })
+    // @Post('validCaptcha')  //当请求该接口时，返回一张随机图片验证码
+    // async validCaptcha(@Body() req: ValidCaptchaDto) {
+    //     const { id, text } = req
+    //     const result = await this.authService.validCaptcha(id, text)
+    //     return result
+    // }
 
     @ApiOperation({
         summary: '短信用户注册/登录',

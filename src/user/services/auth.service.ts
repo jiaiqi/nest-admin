@@ -8,6 +8,7 @@ import { RegisterCodeDTO, RegisterDTO, RegisterSMSDTO, UserInfoDto } from "../dt
 import { Role } from "../entities/role.mongo.entity";
 import { InjectRedis, Redis } from "@nestjs-modules/ioredis";
 import { CaptchaService } from '@/shared/captcha/captcha.service'
+import { getPassword } from "@/shared/utils/user.util";
 export class AuthService {
 
     constructor(
@@ -72,13 +73,7 @@ export class AuthService {
     }
 
 
-    /**
-     * 获取验证码（四位随机数字）
-     * @returns 
-     */
-    generateCode() {
-        return [0, 0, 0, 0].map(() => (parseInt(Math.random() * 10 + ''))).join('')
-    }
+
     /**
       * 获取短信验证码
       * @param mobile 
@@ -109,6 +104,14 @@ export class AuthService {
         return code
     }
 
+    /**
+     * 生成验证码（四位随机数字）
+     * @returns 
+     */
+    generateCode() {
+        return [0, 0, 0, 0].map(() => (parseInt(Math.random() * 10 + ''))).join('')
+    }
+
     async getMobileVerifyCode(mobile) {
         return await this.redis.get('verifyCode' + mobile);
     }
@@ -127,37 +130,33 @@ export class AuthService {
         const image = `data:image/svg+xml;base64,${Buffer.from(data).toString('base64')}`
         return { id, image }
     }
+    // /**
+    //  * 验证图形验证码
+    //  */
+    // async validCaptcha(id, text) {
+    //     const dbText = await this.redis.get('captcha' + id);
+    //     const result = {
+    //         success: true,
+    //         msg: '校验成功',
+    //         code: '1000'
+    //     }
+    //     if (!dbText) {
+    //         result.code = '2000'
+    //         result.msg = '验证码已过期'
+    //     }
+    //     if (text !== dbText) {
+    //         result.code = '3000'
+    //         result.msg = '验证码不匹配'
+    //     }
+    //     return result
+    // }
+
     /**
-     * 验证图形验证码
+     * 短信注册
+     * @param registerDTO 
+     * @returns 
      */
-    async validCaptcha(id, text) {
-        const dbText = await this.redis.get('captcha' + id);
-        const result = {
-            success: true,
-            msg: '校验成功',
-            code: '1000'
-        }
-        if (!dbText) {
-            result.code = '2000'
-            result.msg = '验证码已过期'
-        }
-        if (text !== dbText) {
-            result.code = '3000'
-            result.msg = '验证码不匹配'
-        }
-        return result
-    }
-
-    /**
-   * 短信注册
-   * @param registerDTO 
-   * @returns 
-   */
-    async registerBySMS(
-        registerDTO: RegisterSMSDTO
-    ): Promise<any> {
-
-
+    async registerBySMS(registerDTO: RegisterSMSDTO): Promise<any> {
         const { phone, smsCode } = registerDTO;
 
         // 短信验证码校验
@@ -198,17 +197,13 @@ export class AuthService {
      * @param registerDTO 
      * @returns 
      */
-    async register(
-        registerDTO: RegisterDTO
-    ): Promise<any> {
+    async register(registerDTO: RegisterDTO): Promise<any> {
 
+        // 校验注册信息
         await this.checkRegisterForm(registerDTO)
 
         const { name, password, phone } = registerDTO;
-        // const salt = makeSalt(); // 制作密码盐
-        // const hashPassword = encryptPassword(password, salt);  // 加密密码
-
-        const { salt, hashPassword } = this.getPassword(password)
+        const { salt, hashPassword } = getPassword(password)
 
         const newUser: User = new User()
         newUser.name = name
@@ -228,9 +223,7 @@ export class AuthService {
      * 校验注册信息
      * @param registerDTO 
      */
-    async checkRegisterForm(
-        registerDTO: RegisterDTO,
-    ): Promise<any> {
+    async checkRegisterForm(registerDTO: RegisterDTO,): Promise<any> {
 
         if (registerDTO.password !== registerDTO.passwordRepeat) {
             throw new NotFoundException('两次输入的密码不一致，请检查')
@@ -242,12 +235,5 @@ export class AuthService {
             throw new NotFoundException('用户已存在')
         }
     }
-
-
-    getPassword(password) {
-        const salt = makeSalt(); // 制作密码盐
-        const hashPassword = encryptPassword(password, salt);  // 加密密码
-        return { salt, hashPassword }
-    }
-
+    
 }

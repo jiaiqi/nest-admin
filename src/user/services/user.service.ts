@@ -7,6 +7,7 @@ import { MongoRepository } from 'typeorm';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { UpdateUserDto } from '../dtos/update-user.dto';
 import { User } from '../entities/user.mongo.entity';
+import { getPassword } from '@/shared/utils/user.util';
 
 @Injectable()
 export class UserService {
@@ -23,7 +24,7 @@ export class UserService {
   create(user: CreateUserDto) {
     // 加密处理
     if (user.password) {
-      const { salt, hashPassword } = this.getPassword(user.password)
+      const { salt, hashPassword } = getPassword(user.password)
       user.salt = salt
       user.password = hashPassword
     }
@@ -80,7 +81,7 @@ export class UserService {
     user = { ...post, ...user };
     // 加密处理
     if (user.password) {
-      const { salt, hashPassword } = this.getPassword(user.password)
+      const { salt, hashPassword } = getPassword(user.password)
       user.salt = salt
       user.password = hashPassword
     }
@@ -98,14 +99,5 @@ export class UserService {
     const { url } = await this.uploadService.upload(file)
     return { data: url }
   }
-
-  getPassword(password) {
-    const salt = makeSalt()
-    const hashPassword = encryptPassword(password, salt)
-    return {
-      salt, hashPassword
-    }
-  }
-
 
 }
