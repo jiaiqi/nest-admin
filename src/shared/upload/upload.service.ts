@@ -23,7 +23,9 @@ export class UploadService {
         await outputFile(uploadPath, file.buffer)
 
         return {
-            url: '/static/upload/' + fileName,
+            originalname:file.originalname,
+            size:file.size,
+            mimetype:file.mimetype,
             path: uploadPath
         }
     }

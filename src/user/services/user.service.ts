@@ -96,8 +96,8 @@ export class UserService {
 
 
   async uploadAvatar(file) {
-    const { url } = await this.uploadService.upload(file)
-    return { data: url }
+    const data = await this.uploadService.upload(file)
+    return { data, msg: '上传成功', statusCode: 200 }
   }
 
 }
