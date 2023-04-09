@@ -24,10 +24,10 @@ async function bootstrap() {
   // 创建文档
   generateDocument(app);
 
-  await app.listen(3000);
+  await app.listen(4399);
 
-  console.log(`swagger-ui：http://localhost:3000`);
-  console.log(`   knife4j：http://localhost:3000/doc.html`);
+  console.log(`swagger-ui：http://localhost:4399`);
+  console.log(`   knife4j：http://localhost:4399/doc.html`);
 }
 
 bootstrap();
