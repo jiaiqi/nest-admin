@@ -4,7 +4,7 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagg
 import { LoginDTO } from "../dtos/login.dto";
 import { AuthService } from "../services/auth.service";
 import { AuthGuard } from '@nestjs/passport'
-import { RegisterCodeDTO, RegisterSMSDTO, UserInfoSuccessVO } from "../dtos/auth.dto";
+import { RegisterCodeDTO, RegisterDTO, RegisterSMSDTO, UserInfoSuccessVO } from "../dtos/auth.dto";
 import { ValidCaptchaDto } from "@/shared/dtos/valid-captcha.dto";
 @ApiTags('认证鉴权')
 @Controller('auth')
@@ -12,6 +12,25 @@ export class AuthController {
     constructor(
         private authService: AuthService,
     ) { }
+
+
+    @ApiOperation({
+        summary: '注册账号',
+    })
+    @ApiResponse({
+        status: HttpStatus.OK,
+        // type: SwaggerBaseApiResponse(LoginDTO),
+    })
+    @ApiResponse({
+        status: HttpStatus.NOT_FOUND,
+        // type: BaseApiErrorResponse,
+    })
+    @Post('register')
+    async register(
+        @Body() registerDto: RegisterDTO
+    ): Promise<any> {
+        return this.authService.register(registerDto)
+    }
 
     @ApiOperation({
         summary: '用户登录',

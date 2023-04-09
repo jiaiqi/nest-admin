@@ -3,7 +3,32 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, Matches, IsString } from 'class-validator';
 import { regMobileCN } from "@/shared/utils/regex.util";
 
+/**
+ * 校验图形验证码
+ */
+export class RegisterCodeDTO {
+  /**
+   * 手机号（系统唯一）
+   */
+  @Matches(regMobileCN, { message: '请输入正确手机号' })
+  @IsNotEmpty({ message: '请输入手机号' })
+  @ApiProperty({ example: '15191803240' })
+  readonly phone: string;
 
+  @IsNotEmpty({ message: '请输入验证码ID' })
+  @ApiProperty({ example: 'GaBUGhJzESU=' })
+  readonly captchaId: string;
+
+  @IsNotEmpty({ message: '请输入图形验证码' })
+  @ApiProperty({ example: '0000' })
+  readonly captchaCode: string;
+
+}
+
+
+/**
+ * 手机号、验证码注册
+ */
 export class RegisterSMSDTO {
 
   /**
@@ -31,33 +56,16 @@ export class RegisterSMSDTO {
 
 }
 
-export class RegisterCodeDTO {
-
-  /**
-   * 手机号（系统唯一）
-   */
-  @Matches(regMobileCN, { message: '请输入正确手机号' })
-  @IsNotEmpty({ message: '请输入手机号' })
-  @ApiProperty({ example: '13611177420' })
-  readonly phone: string;
-
-  @IsNotEmpty({ message: '请输入验证码ID' })
-  @ApiProperty({ example: 'GaBUGhJzESU=' })
-  readonly captchaId: string;
-
-  @IsNotEmpty({ message: '请输入手机号' })
-  @ApiProperty({ example: '0000' })
-  readonly captchaCode: string;
-
-}
-
+/**
+ * 手机号、用户名、密码注册
+ */
 export class RegisterDTO {
   /**
    * 手机号，唯一
    */
   @Matches(regMobileCN, { message: '请输入正确手机号' })
   @IsNotEmpty({ message: '请输入手机号' })
-  @ApiProperty({ example: '13611177421' })
+  @ApiProperty({ example: '15191803240' })
   readonly phone: string;
 
   /**
@@ -65,43 +73,42 @@ export class RegisterDTO {
    */
   @IsNotEmpty({ message: '请输入用户昵称' })
   @IsString({ message: '名字必须是 String 类型' })
-  @ApiProperty({ example: "然叔" })
+  @ApiProperty({ example: "狗蛋儿" })
   readonly name: string;
 
   /**
    * 用户密码
    */
   @IsNotEmpty({ message: '请输入密码' })
-  @ApiProperty({ example: '888888' })
+  @ApiProperty({ example: 'goudaner666' })
   readonly password: string;
 
   /**
    * 二次输入密码
    */
   @IsNotEmpty({ message: '请再次输入密码' })
-  @ApiProperty({ example: '888888' })
+  @ApiProperty({ example: 'goudaner666' })
   readonly passwordRepeat: string
 }
 
 export class UserInfoDto {
-
   /**
   * 手机号（系统唯一）
   */
   @Matches(regMobileCN, { message: '请输入正确手机号' })
   @IsNotEmpty({ message: '请输入手机号' })
-  @ApiProperty({ example: '13611177421' })
+  @ApiProperty({ example: '15191803240' })
   readonly phone: string;
 
-  @ApiProperty({ example: '然叔' })
+  @ApiProperty({ example: '狗蛋儿' })
   @IsNotEmpty()
   name: string;
 
-  @ApiProperty({ example: '123456' })
+  @ApiProperty({ example: 'goudaner666' })
   @IsNotEmpty()
   password: string;
 
-  @ApiProperty({ example: '15906475@qq.com' })
+  @ApiProperty({ example: 'goudaner@qq.com' })
   @IsNotEmpty()
   email: string;
 
@@ -121,7 +128,7 @@ export class UserInfoDto {
 //   @IsNotEmpty()
 //   organization: string;
 
-//   @ApiProperty({ example: 'beijing' })
+//   @ApiProperty({ example: 'xian' })
 //   @IsNotEmpty()
 //   location: string;
 

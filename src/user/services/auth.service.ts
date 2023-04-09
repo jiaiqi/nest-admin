@@ -198,7 +198,6 @@ export class AuthService {
      * @returns 
      */
     async register(registerDTO: RegisterDTO): Promise<any> {
-
         // 校验注册信息
         await this.checkRegisterForm(registerDTO)
 
@@ -235,5 +234,5 @@ export class AuthService {
             throw new NotFoundException('用户已存在')
         }
     }
-    
+
 }
