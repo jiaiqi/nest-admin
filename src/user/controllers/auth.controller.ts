@@ -1,11 +1,12 @@
 import { Body, Controller, Get, HttpStatus, Post, Req, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
-// import { BaseApiErrorResponse, SwaggerBaseApiResponse } from '../../shared/dtos/base-api-response.dto';
+import { BaseApiErrorResponse, SwaggerBaseApiResponse } from '../../shared/dtos/base-api-response.dto';
 import { LoginDTO } from "../dtos/login.dto";
 import { AuthService } from "../services/auth.service";
 import { AuthGuard } from '@nestjs/passport'
-import { RegisterCodeDTO, RegisterDTO, RegisterSMSDTO, UserInfoSuccessVO } from "../dtos/auth.dto";
+import { RegisterCodeDTO, RegisterDTO, RegisterSMSDTO, UserInfoDto, UserInfoSuccessVO } from "../dtos/auth.dto";
 import { ValidCaptchaDto } from "@/shared/dtos/valid-captcha.dto";
+import { User } from "../entities/user.mongo.entity";
 @ApiTags('认证鉴权')
 @Controller('auth')
 export class AuthController {
@@ -19,11 +20,11 @@ export class AuthController {
     })
     @ApiResponse({
         status: HttpStatus.OK,
-        // type: SwaggerBaseApiResponse(LoginDTO),
+        type: SwaggerBaseApiResponse(LoginDTO),
     })
     @ApiResponse({
         status: HttpStatus.NOT_FOUND,
-        // type: BaseApiErrorResponse,
+        type: BaseApiErrorResponse,
     })
     @Post('register')
     async register(
@@ -37,11 +38,11 @@ export class AuthController {
     })
     @ApiResponse({
         status: HttpStatus.OK,
-        // type: SwaggerBaseApiResponse(LoginDTO),
+        type: SwaggerBaseApiResponse(LoginDTO),
     })
     @ApiResponse({
         status: HttpStatus.NOT_FOUND,
-        // type: BaseApiErrorResponse,
+        type: BaseApiErrorResponse,
     })
     @Post('login')
     async login(
@@ -55,11 +56,11 @@ export class AuthController {
     })
     @ApiResponse({
         status: HttpStatus.OK,
-        // type:SwaggerBaseApiResponse(User)
+        type:SwaggerBaseApiResponse(User)
     })
     @ApiResponse({
         status: HttpStatus.NOT_FOUND,
-        // type: BaseApiErrorResponse,
+        type: BaseApiErrorResponse,
     })
     @ApiBearerAuth()
     @Get('info')
@@ -88,11 +89,11 @@ export class AuthController {
     })
     @ApiResponse({
         status: HttpStatus.OK,
-        // type: SwaggerBaseApiResponse(UserInfoDto),
+        type: SwaggerBaseApiResponse(UserInfoDto),
     })
     @ApiResponse({
         status: HttpStatus.NOT_FOUND,
-        // type: BaseApiErrorResponse,
+        type: BaseApiErrorResponse,
     })
     @Post('registerCode')
     async registerCode(@Body() registerCodeDto: RegisterCodeDTO,): Promise<any> {
@@ -120,11 +121,11 @@ export class AuthController {
     })
     @ApiResponse({
         status: HttpStatus.OK,
-        // type: SwaggerBaseApiResponse(RegisterSMSDTO),
+        type: SwaggerBaseApiResponse(RegisterSMSDTO),
     })
     @ApiResponse({
         status: HttpStatus.NOT_FOUND,
-        // type: BaseApiErrorResponse,
+        type: BaseApiErrorResponse,
     })
     @Post('registerBySMS')
     async registerBySMS(

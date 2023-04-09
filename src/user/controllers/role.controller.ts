@@ -3,6 +3,7 @@ import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Query } 
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { CreateRoleDto } from "../dtos/role.dto";
 import { RoleService } from "../services/role.service";
+import { BaseApiErrorResponse } from "@/shared/dtos/base-api-response.dto";
 
 @Controller('role')
 @ApiTags('角色管理')
@@ -32,7 +33,7 @@ export class RoleController {
     })
     @ApiResponse({
         status: HttpStatus.NOT_FOUND,
-        // type: BaseApiErrorResponse,
+        type: BaseApiErrorResponse,
     })
     @Get()
     async findAll(
@@ -55,7 +56,7 @@ export class RoleController {
     })
     @ApiResponse({
         status: HttpStatus.NOT_FOUND,
-        // type: BaseApiErrorResponse,
+        type: BaseApiErrorResponse,
     })
     @Get(':id')
     async findOne(@Param('id') id: string) {
@@ -73,7 +74,7 @@ export class RoleController {
     })
     @ApiResponse({
         status: HttpStatus.NOT_FOUND,
-        // type: BaseApiErrorResponse,
+        type: BaseApiErrorResponse,
     })
     @Patch(':id')
     async update(@Param('id') id: string, @Body() updateCourseDto: CreateRoleDto) {
@@ -82,7 +83,7 @@ export class RoleController {
         }
     }
 
-    // @ApiBearerAuth()
+    @ApiBearerAuth()
     @ApiOperation({
         summary: '删除单个角色',
     })
