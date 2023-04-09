@@ -1,5 +1,5 @@
 import { SuccessVO } from "@/shared/dtos/success.dto";
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional, ApiResponseProperty } from '@nestjs/swagger';
 import { IsNotEmpty, Matches, IsString } from 'class-validator';
 import { regMobileCN } from "@/shared/utils/regex.util";
 
@@ -12,7 +12,7 @@ export class RegisterCodeDTO {
    */
   @Matches(regMobileCN, { message: '请输入正确手机号' })
   @IsNotEmpty({ message: '请输入手机号' })
-  @ApiProperty({ example: '15191803240' })
+  @ApiProperty({ example: '18329928562' })
   readonly phone: string;
 
   @IsNotEmpty({ message: '请输入验证码ID' })
@@ -36,7 +36,7 @@ export class RegisterSMSDTO {
    */
   @Matches(regMobileCN, { message: '请输入正确手机号' })
   @IsNotEmpty({ message: '请输入手机号' })
-  @ApiProperty({ example: '15191803240' })
+  @ApiProperty({ example: '18329928562' })
   readonly phone: string;
 
   /**
@@ -53,7 +53,6 @@ export class RegisterSMSDTO {
   @IsNotEmpty({ message: '请输入图形验证码' })
   @ApiProperty({ example: '0000' })
   readonly verifyCode: string;
-
 }
 
 /**
@@ -65,7 +64,7 @@ export class RegisterDTO {
    */
   @Matches(regMobileCN, { message: '请输入正确手机号' })
   @IsNotEmpty({ message: '请输入手机号' })
-  @ApiProperty({ example: '15191803240' })
+  @ApiProperty({ example: '18329928562' })
   readonly phone: string;
 
   /**
@@ -97,7 +96,7 @@ export class UserInfoDto {
   */
   @Matches(regMobileCN, { message: '请输入正确手机号' })
   @IsNotEmpty({ message: '请输入手机号' })
-  @ApiProperty({ example: '15191803240' })
+  @ApiProperty({ example: '18329928562' })
   readonly phone: string;
 
   @ApiProperty({ example: '狗蛋儿' })
