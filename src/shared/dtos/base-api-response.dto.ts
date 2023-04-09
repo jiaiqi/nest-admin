@@ -1,10 +1,24 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
+type meta = {
+  current: number
+  size: number
+  total: number
+}
+
 export class BaseApiResponse<T> {
+  // 返回的数据
   public data: T; // Swagger Decorator is added in the extended class below, since that will override this one.
 
-  @ApiProperty({ type: Object })
-  public meta: any;
+  // 分页信息
+  @ApiProperty({ type: Object,example:{current:1,size:10,total:15} })
+  public meta: meta;
+
+  @ApiProperty({ type: Number,example:200 })
+  public statusCode: number;
+
+  @ApiProperty({ type: String,example:'操作成功' })
+  public message: string;
 }
 
 export function SwaggerBaseApiResponse<T>(type: T): typeof BaseApiResponse {

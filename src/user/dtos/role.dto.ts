@@ -2,7 +2,7 @@ import { IdDTO } from "@/shared/dtos/id.dto";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty } from "class-validator";
 
-export class CreateRoleDto extends IdDTO {
+export class CreateRoleDto {
 
     @ApiProperty({
         example:'admin'

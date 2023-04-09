@@ -3,7 +3,7 @@ import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, Query, U
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { CreateRoleDto } from "../dtos/role.dto";
 import { RoleService } from "../services/role.service";
-import { BaseApiErrorResponse } from "@/shared/dtos/base-api-response.dto";
+import { BaseApiErrorResponse, SwaggerBaseApiResponse } from "@/shared/dtos/base-api-response.dto";
 import { AuthGuard } from "@nestjs/passport";
 
 @Controller('role')
@@ -30,7 +30,7 @@ export class RoleController {
     })
     @ApiResponse({
         status: HttpStatus.OK,
-        type: [CreateRoleDto],
+        type: SwaggerBaseApiResponse([CreateRoleDto]),
     })
     @ApiResponse({
         status: HttpStatus.NOT_FOUND,

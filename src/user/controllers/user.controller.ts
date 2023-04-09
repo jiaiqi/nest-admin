@@ -14,13 +14,14 @@ import {
   UploadedFile,
 } from '@nestjs/common';
 import { UserService } from '../services/user.service';
-import { CreateUserDto } from '../dtos/user.dto';
+import { CreateUserDto, UserInfoDto } from '../dtos/user.dto';
 import { ApiConsumes, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { PaginationParamsDto } from '@/shared/dtos/pagination-params.dto';
 import { QueryBodyDto } from '@/shared/dtos/query-body-dto';
 import { UploadDTO } from '../dtos/upload.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { encryptFileMD5 } from '@/shared/utils/cryptogram.util';
+import { BaseApiErrorResponse, SwaggerBaseApiResponse } from '@/shared/dtos/base-api-response.dto';
 
 @Controller('user')
 @ApiTags('用户管理')
@@ -37,6 +38,10 @@ export class UserController {
     status: HttpStatus.CREATED,
     type: CreateUserDto,
   })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    type:BaseApiErrorResponse
+  })
   create(@Body() user: CreateUserDto) {
     console.log(user);
     return this.userService.create(user);
@@ -47,10 +52,11 @@ export class UserController {
   })
   @ApiResponse({
     status: HttpStatus.OK,
-    type: [CreateUserDto],
+    type: SwaggerBaseApiResponse([UserInfoDto]),
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
+    type:BaseApiErrorResponse
   })
   @Get('')
   async findAll(@Query() query: PaginationParamsDto) {
@@ -72,10 +78,11 @@ export class UserController {
   })
   @ApiResponse({
     status: HttpStatus.OK,
-    type: [CreateUserDto],
+    type: SwaggerBaseApiResponse([UserInfoDto]),
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
+    type:BaseApiErrorResponse
   })
   @Post('/list')
   async findAll2(@Body() body: QueryBodyDto) {
@@ -100,7 +107,7 @@ export class UserController {
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
-    type: CreateUserDto,
+    type: BaseApiErrorResponse,
   })
   @Get(':id')
   async findOne(@Param('id') id: string) {
@@ -116,7 +123,7 @@ export class UserController {
   })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
-    type: CreateUserDto,
+    type: BaseApiErrorResponse,
   })
   @Patch(':id')
   async update(@Param('id') id: string, @Body() user: CreateUserDto) {
