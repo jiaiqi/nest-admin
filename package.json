@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "preinstall": "node ./scripts/preinstall.js pnpm",
-    "push": "git push gitee && git push github",
+    "push": "git push gitee && git push github && git push lzj",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
