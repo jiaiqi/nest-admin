@@ -13,4 +13,4 @@ import { CaptchaService } from './captcha/captcha.service';
   providers: [SystemService, ...DatabaseProvider, UploadService, CaptchaService],
   imports: [ConfigModule.forRoot(configModuleOptions), AppLoggerModule],
 })
-export class ShareModule { }
+export class SharedModule { }

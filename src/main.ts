@@ -24,8 +24,9 @@ async function bootstrap() {
   // 创建文档
   generateDocument(app);
 
-  await app.listen(4399);
+  await app.listen(4399,'0.0.0.0');
 
+  console.log(`Application is running on: ${await app.getUrl()}`);
   console.log(`swagger-ui：http://localhost:4399`);
   console.log(`   knife4j：http://localhost:4399/doc.html`);
 }
