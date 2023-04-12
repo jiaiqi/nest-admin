@@ -3,9 +3,11 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 interface Response {
-  success:boolean;
-  message: string;
-  data: any;
+  data: [] | {}
+  meta?: object
+  success: boolean
+  message: string
+  code: number
 }
 
 @Injectable()
@@ -14,9 +16,11 @@ export class ResponseInterceptor implements NestInterceptor {
     return next.handle().pipe(
       map(data => {
         const response: Response = {
-          success:true,
+          success: true,
+          code: 200,
+          data:data.data||data||undefined,
+          meta:data.meta||data.page||undefined,
           message: '请求成功',
-          data,
         };
         return response;
       }),

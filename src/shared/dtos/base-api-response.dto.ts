@@ -11,13 +11,16 @@ export class BaseApiResponse<T> {
   public data: T; // Swagger Decorator is added in the extended class below, since that will override this one.
 
   // 分页信息
-  @ApiProperty({ type: Object,example:{page:1,size:10,total:15} })
+  @ApiProperty({ type: Object, example: { page: 1, size: 10, total: 15 }, description: '分页数据' })
   public meta: meta;
 
-  @ApiProperty({ type: Number,example:200 })
-  public statusCode: number;
+  @ApiProperty({ type: Number, example: 200, description: '状态码' })
+  public code: number;
 
-  @ApiProperty({ type: String,example:'操作成功' })
+  @ApiProperty({ type: Boolean, example: true, description: '请求是否成功' })
+  public success: boolean;
+
+  @ApiProperty({ type: String, example: '操作成功', description: '提示信息' })
   public message: string;
 }
 

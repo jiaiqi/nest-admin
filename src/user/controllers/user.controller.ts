@@ -90,7 +90,7 @@ export class UserController {
     const { data, count } = await this.userService.findAll2(body);
     return {
       data,
-      page: {
+      meta: {
         total: count,
         size: Number(page.size),
         page: Number(page.page),
