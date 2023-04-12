@@ -23,7 +23,7 @@ export class PaginationParamsDto {
   @IsOptional()
   @Min(1)
   @Transform(({ value }) => parseInt(value, 10), { toClassOnly: true })
-  current = 1;
+  page = 1;
 }
 
 export class PaginationParams2Dto {

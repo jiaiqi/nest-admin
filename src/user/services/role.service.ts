@@ -15,10 +15,10 @@ export class RoleService {
         return this.RoleRepository.save(Role)
     }
 
-    async findAll({ current, size }: PaginationParamsDto): Promise<{ data: Role[]; count: number }> {
+    async findAll({ page, size }: PaginationParamsDto): Promise<{ data: Role[]; count: number }> {
         const [data, count] = await this.RoleRepository.findAndCount({
             order: { createAt: 'DESC' },
-            skip: (current - 1) * size,
+            skip: (page - 1) * size,
             take: size * 1,
             cache: true
         })

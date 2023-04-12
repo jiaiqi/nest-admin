@@ -31,11 +31,11 @@ export class UserService {
     return this.userRepository.save({ ...user });
   }
 
-  async findAll({ current, size }): Promise<{ data: User[]; count: number }> {
-    console.log(current, size);
+  async findAll({ page, size }): Promise<{ data: User[]; count: number }> {
+    console.log(page, size);
     const [data, count] = await this.userRepository.findAndCount({
       order: { createAt: 'DESC' },
-      skip: (current - 1) * size,
+      skip: (page - 1) * size,
       take: size * 1,
       cache: true,
     });
@@ -64,7 +64,7 @@ export class UserService {
       // select:[],
       where,
       order: { ...orderParams },
-      skip: (page.current - 1) * page.size,
+      skip: (page.page - 1) * page.size,
       take: page.size * 1,
       cache: true,
     });

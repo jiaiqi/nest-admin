@@ -40,7 +40,7 @@ class PageParams {
   @IsOptional()
   @Min(1)
   @Transform(({ value }) => parseInt(value, 10), { toClassOnly: true })
-  current = 1;
+  page = 1;
 }
 
 export class QueryBodyDto {
@@ -57,7 +57,7 @@ export class QueryBodyDto {
     description: '分页参数',
     type: Object,
     example: {
-      current: 1,
+      page: 1,
       size: 5,
     },
   })
